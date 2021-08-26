@@ -8,6 +8,7 @@ import java.util.Objects;
 @Table(name = "ACCOUNT")
 public class Account implements Serializable {
 
+    private static final long serialVersionUID = 7965908118439354885L;
     @Id
     @SequenceGenerator(name = "ACC_GENERIC_SEQ", sequenceName = "ACCOUNT.ACC_GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_GENERIC_SEQ")
@@ -22,11 +23,11 @@ public class Account implements Serializable {
     @JoinColumn(name = "ACCOUNT_TYPE_ID")
     private AccountType accountTypeId;
 
-    @Column(name = "ACCOUNT_BALANCE")
+    @Column(name = "BALANCE")
     private Long accountBalance;
 
     @ManyToOne
-    @JoinColumn(name = "account_account_type_id")
+    @JoinColumn(name = "ACCOUNT_TYPE_ID")
     public AccountType getAccountType() {
         return accountTypeId;
     }

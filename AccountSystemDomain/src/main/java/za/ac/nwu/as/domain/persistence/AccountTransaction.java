@@ -9,6 +9,7 @@ import java.util.Objects;
 @Table(name = "ACCOUNT_TRANSACTION")
 public class AccountTransaction implements Serializable {
 
+    private static final long serialVersionUID = -6665887695940110048L;
     @Id
     @SequenceGenerator(name = "ACC_GENERIC_SEQ", sequenceName = "ACCOUNT.ACC_GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_GENERIC_SEQ")

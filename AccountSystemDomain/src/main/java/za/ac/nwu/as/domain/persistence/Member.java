@@ -9,6 +9,7 @@ import java.util.Set;
 @Table(name = "MEMBER")
 public class Member implements Serializable {
 
+    private static final long serialVersionUID = -5347390031256184618L;
     @Id
     @SequenceGenerator(name = "ACC_GENERIC_SEQ", sequenceName = "ACCOUNT.ACC_GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_GENERIC_SEQ")
@@ -27,7 +28,9 @@ public class Member implements Serializable {
     @Column(name = "MEMBER_PHONE")
     private String memPhone;
 
+    private Set<AccountTransaction> accountTransactions;
     private Set<Account> account;
+
 
     public Member(Long memID, String memFirstName, String memLastName, String memEmail, String memPhone) {
         this.memID = memID;
@@ -81,7 +84,16 @@ public class Member implements Serializable {
         this.memPhone = memPhone;
     }
 
-    @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "account", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "memberID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions(){
+        return accountTransactions;
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions){
+        this.accountTransactions = accountTransactions;
+    }
+
+    @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "memberID", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<Account> getAccount(){
         return account;
     }

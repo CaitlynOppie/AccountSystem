@@ -10,6 +10,7 @@ import java.util.Set;
 @Table(name = "ACCOUNT_TYPE")
 public class AccountType implements Serializable {
 
+    private static final long serialVersionUID = 6285025905766321171L;
     @Id
     @SequenceGenerator(name = "ACC_GENERIC_SEQ", sequenceName = "ACCOUNT.ACC_GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_GENERIC_SEQ")
@@ -19,14 +20,13 @@ public class AccountType implements Serializable {
     @Column(name = "MNEMONIC")
     private String mnemonic;
 
-    @Column(name = "ACCOUNT_TYPE_NAME")
+    @Column(name = "ACCOUNT_NAME")
     private String accountTypeName;
 
-    @Column(name = "CREATION DATE")
+    @Column(name = "CREATION_DATE")
     private LocalDate creationDate;
 
     private Set<AccountTransaction> accountTransactions;
-    private Set<Account> account;
 
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeId = accountTypeId;
@@ -35,9 +35,14 @@ public class AccountType implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public AccountType() {
+    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate) {
+        this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
+        this.creationDate = creationDate;
     }
 
+    public AccountType() {
+    }
 
     public Long getAccountTypeId() {
         return accountTypeId;
@@ -80,14 +85,6 @@ public class AccountType implements Serializable {
         this.accountTransactions = accountTransactions;
     }
 
-    @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "account", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    public Set<Account> getAccount(){
-        return account;
-    }
-
-    public void setAccount(Set<Account> account){
-        this.account = account;
-    }
 
     @Override
     public boolean equals(Object o) {
