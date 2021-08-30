@@ -3,6 +3,7 @@ package za.ac.nwu.as.domain.persistence;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "ACCOUNT")
@@ -26,13 +27,13 @@ public class Account implements Serializable {
     @Column(name = "BALANCE")
     private Long accountBalance;
 
-    @ManyToOne
-    @JoinColumn(name = "ACCOUNT_TYPE_ID")
+    private Set<AccountTransaction> accountTransactions;
+
     public AccountType getAccountType() {
         return accountTypeId;
     }
 
-    public void setAccountType(AccountType account) {
+    public void setAccountType(AccountType accountTypeId) {
         this.accountTypeId = accountTypeId;
     }
 
@@ -46,6 +47,11 @@ public class Account implements Serializable {
     public Account() {
     }
 
+    public Account(Member memberID, AccountType accountTypeId, Long accountBalance) {
+        this.memberID = memberID;
+        this.accountTypeId = accountTypeId;
+        this.accountBalance = accountBalance;
+    }
 
     public Long getAccountNumber() {
         return accountNumber;
@@ -73,13 +79,21 @@ public class Account implements Serializable {
         this.accountTypeId = accountTypeId;
     }
 
-
     public Long getAccountBalance() {
         return accountBalance;
     }
 
     public void setAccountBalance(Long accountBalance) {
         this.accountBalance = accountBalance;
+    }
+
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions(){
+        return accountTransactions;
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions){
+        this.accountTransactions = accountTransactions;
     }
 
     @Override

@@ -23,8 +23,8 @@ public class CreateAccountTypeFlowImpl implements CreateAccountTypeFlow {
 
     @Override
     public AccountTypeDto create(AccountTypeDto accountType) {
-        if(null == accountType.getCreationDate()) {
-            accountType.setCreationDate(LocalDate.now());
+        if(null == accountType.getMnemonic()) {
+            accountType.setMnemonic("MILES");
         }
         return accountTypeTranslator.create(accountType);
     }

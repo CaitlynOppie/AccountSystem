@@ -84,7 +84,7 @@ public class Member implements Serializable {
         this.memPhone = memPhone;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "memberID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions(){
         return accountTransactions;
     }

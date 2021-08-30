@@ -10,18 +10,26 @@ public interface AccountTypeRepository extends JpaRepository<AccountType, Long> 
 
     @Query(value = "SELECT" +
     " ACCOUNT_TYPE_ID," +
-    "ACCOUNT_NAME," +
-    "CREATION_DATE," +
+    "ACCOUNT_NAME,"+
     "MNEMONIC" +
     "FROM" +
    "ACCOUNT.ACCOUNT_TYPE" +
     "WHERE MNEMONIC = :mnemonic", nativeQuery = true)
     AccountType getAccountTypeByMnemonicNativeQuery(String mnemonic);
 
-        @Query(value = "SELECT" +
+    @Query(value = "SELECT" +
     " at" +
     "FROM" +
    "AccountType at" +
     "WHERE at.mnemonic = :mnemonic", nativeQuery = true)
     AccountType getAccountTypeByMnemonic(String mnemonic);
+
+    @Query(value = "SELECT" +
+            " ACCOUNT_TYPE_ID," +
+            "ACCOUNT_NAME,"+
+            "MNEMONIC" +
+            "FROM" +
+            "ACCOUNT.ACCOUNT_TYPE" +
+            "WHERE ACCOUNT_TYPE_ID = :accountTypeId", nativeQuery = true)
+    AccountType getAccountTypeByAccountTypeIdNativeQuery(String accountTypeId);
 }
