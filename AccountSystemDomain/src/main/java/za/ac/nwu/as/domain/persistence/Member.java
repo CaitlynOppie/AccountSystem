@@ -43,6 +43,12 @@ public class Member implements Serializable {
     public Member() {
     }
 
+    public Member(String memFirstName, String memLastName, String memEmail, String memPhone) {
+        this.memFirstName = memFirstName;
+        this.memLastName = memLastName;
+        this.memEmail = memEmail;
+        this.memPhone = memPhone;
+    }
 
     public Long getMemID() {
         return memID;

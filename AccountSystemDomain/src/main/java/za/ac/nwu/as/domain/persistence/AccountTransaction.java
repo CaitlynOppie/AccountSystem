@@ -46,6 +46,13 @@ public class AccountTransaction implements Serializable {
     public AccountTransaction() {
     }
 
+    public AccountTransaction(AccountType accountType, Member memberID, Account accountNumber, Long amount, LocalDate transactionDate) {
+        this.accountType = accountType;
+        this.memberID = memberID;
+        this.accountNumber = accountNumber;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+    }
 
     public Long getTransactionID() {
         return transactionID;

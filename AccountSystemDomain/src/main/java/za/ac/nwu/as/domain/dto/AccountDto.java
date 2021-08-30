@@ -34,7 +34,7 @@ public class AccountDto implements Serializable {
     }
 
     @ApiModelProperty(position = 1,
-        value = "Member_ID",
+        value = "Account Member_ID",
         name = "Member_ID",
         notes = "Uniquely identifies the member of the account",
         dataType = "Member",
@@ -45,18 +45,18 @@ public class AccountDto implements Serializable {
     public void setMemberID(Member memberID){this.memberID = memberID;}
 
     @ApiModelProperty(position = 1,
-            value = "Account_Type",
-            name = "Account_Type",
+            value = "Account Account_Type_ID",
+            name = "Account_Type_ID",
             notes = "Identifies the type of account",
             dataType = "Account",
-            example = "Miles",
+            example = "1",
             required = true)
 
     public AccountType getAccountType(){return accountTypeId;}
     public void setAccountType(AccountType accountTypeId){this.accountTypeId = accountTypeId;}
 
     @ApiModelProperty(position = 3,
-            value = "Account_Balance",
+            value = "Account Account_Balance",
             name = "Account_Balance",
             notes = "Provides the current balance of the account",
             dataType = "java.lang.Long",
