@@ -4,90 +4,126 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.as.domain.persistence.Account;
-import za.ac.nwu.as.domain.persistence.AccountType;
 import za.ac.nwu.as.domain.persistence.Member;
 
-import javax.persistence.FetchType;
 import java.io.Serializable;
 import java.util.Objects;
 
 @ApiModel(value = "Account", description = "A DTO that represents the Account")
 public class AccountDto implements Serializable {
 
+    private Integer accountNumber;
     private Member memberID;
-    private AccountType accountTypeId;
-    private Long accountBalance;
+    private String type;
+    private double balance;
 
     public AccountDto() {
     }
 
-    public AccountDto(Member memberID, AccountType accountTypeId, Long accountBalance) {
+    public AccountDto(Integer accountNumber, Member memberID, String type, double balance) {
+        this.accountNumber = accountNumber;
         this.memberID = memberID;
-        this.accountTypeId = accountTypeId;
-        this.accountBalance = accountBalance;
+        this.type = type;
+        this.balance = balance;
     }
 
-    public AccountDto(Account account){
+    public AccountDto(Account account)
+    {
+        this.setAccountNumber(account.getAccountNumber());
         this.setMemberID(account.getMemberID());
-        this.setAccountType(account.getAccountType());
-        this.setAccountBalance(account.getAccountBalance());
+        this.setType(account.getType());
+        this.setBalance(account.getBalance());
     }
 
     @ApiModelProperty(position = 1,
-        value = "Account Member_ID",
-        name = "Member_ID",
-        notes = "Uniquely identifies the member of the account",
-        dataType = "Member",
-        example = "0006090281087",
-        required = true)
+            value = "Account accountNumber",
+            name = "accountNumber",
+            notes = "Uniquely identifies the account",
+            dataType = "java.lang.Integer",
+            example = "123456789",
+            required = true)
 
-    public Member getMemberID(){return memberID;}
-    public void setMemberID(Member memberID){this.memberID = memberID;}
+    public Integer getAccountNumber() {
+        return accountNumber;
+    }
 
-    @ApiModelProperty(position = 1,
-            value = "Account Account_Type_ID",
-            name = "Account_Type_ID",
-            notes = "Identifies the type of account",
-            dataType = "Account",
+    public void setAccountNumber(Integer accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    @ApiModelProperty(position = 2,
+            value = "Account memberID",
+            name = "memberID",
+            notes = "Uniquely identifies the member of the account",
+            dataType = "java.lang.Integer",
             example = "1",
             required = true)
 
-    public AccountType getAccountType(){return accountTypeId;}
-    public void setAccountType(AccountType accountTypeId){this.accountTypeId = accountTypeId;}
+    public Member getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(Member memberID) {
+        this.memberID = memberID;
+    }
 
     @ApiModelProperty(position = 3,
-            value = "Account Account_Balance",
-            name = "Account_Balance",
-            notes = "Provides the current balance of the account",
-            dataType = "java.lang.Long",
+            value = "Account type",
+            name = "type",
+            notes = "Identifies the type of the account",
+            dataType = "java.lang.String",
+            example = "Miles",
+            required = true)
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @ApiModelProperty(position = 4,
+            value = "Account balance",
+            name = "balance",
+            notes = "Provides the balance of the account",
+            dataType = "java.lang.double",
             example = "250",
             required = true)
 
-    public Long getAccountBalance(){return accountBalance;}
-    public void setAccountBalance(Long accountBalance){this.accountBalance = accountBalance;}
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountDto that = (AccountDto) o;
-        return Objects.equals(memberID, that.memberID) && Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountBalance, that.accountBalance);
+        return Double.compare(that.balance, balance) == 0 && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(memberID, that.memberID) && Objects.equals(type, that.type);
     }
 
     @JsonIgnore
-    public Account getAccount(){ return new Account(getMemberID(), getAccountType(), getAccountBalance());}
+    public Account getAccount(){
+        return new Account(getAccountNumber(), getMemberID(), getType(), getBalance());
+    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberID, accountTypeId, accountBalance);
+        return Objects.hash(accountNumber, memberID, type, balance);
     }
 
     @Override
     public String toString() {
         return "AccountDto{" +
-                "memberID=" + memberID +
-                ", accountTypeId=" + accountTypeId +
-                ", accountBalance=" + accountBalance +
+                "accountNumber=" + accountNumber +
+                ", memberID=" + memberID +
+                ", type='" + type + '\'' +
+                ", balance=" + balance +
                 '}';
     }
 }

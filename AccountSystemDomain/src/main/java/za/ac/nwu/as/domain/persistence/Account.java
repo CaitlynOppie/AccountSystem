@@ -14,53 +14,38 @@ public class Account implements Serializable {
     @SequenceGenerator(name = "ACC_GENERIC_SEQ", sequenceName = "ACCOUNT.ACC_GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_GENERIC_SEQ")
     @Column(name = "ACCOUNT_NUMBER")
-    private Long accountNumber;
+    private Integer accountNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member memberID;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACCOUNT_TYPE_ID")
-    private AccountType accountTypeId;
+    @Column(name = "TYPE")
+    private String type;
 
     @Column(name = "BALANCE")
-    private Long accountBalance;
+    private double balance;
 
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<AccountTransaction> accountTransactions;
-
-    public AccountType getAccountType() {
-        return accountTypeId;
-    }
-
-    public void setAccountType(AccountType accountTypeId) {
-        this.accountTypeId = accountTypeId;
-    }
-
-    public Account(Long accountNumber, Member memberID, AccountType accountTypeId, Long accountBalance) {
-        this.accountNumber = accountNumber;
-        this.memberID = memberID;
-        this.accountTypeId = accountTypeId;
-        this.accountBalance = accountBalance;
-    }
 
     public Account() {
     }
 
-    public Account(Member memberID, AccountType accountTypeId, Long accountBalance) {
+    public Account(Integer accountNumber, Member memberID, String type, double balance) {
+        this.accountNumber = accountNumber;
         this.memberID = memberID;
-        this.accountTypeId = accountTypeId;
-        this.accountBalance = accountBalance;
+        this.type = type;
+        this.balance = balance;
     }
 
-    public Long getAccountNumber() {
+    public Integer getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Long accountNumber) {
+    public void setAccountNumber(Integer accountNumber) {
         this.accountNumber = accountNumber;
     }
-
 
     public Member getMemberID() {
         return memberID;
@@ -70,24 +55,22 @@ public class Account implements Serializable {
         this.memberID = memberID;
     }
 
-
-    public AccountType getAccountTypeId() {
-        return accountTypeId;
+    public String getType() {
+        return type;
     }
 
-    public void setAccountTypeId(AccountType accountTypeId) {
-        this.accountTypeId = accountTypeId;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Long getAccountBalance() {
-        return accountBalance;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setAccountBalance(Long accountBalance) {
-        this.accountBalance = accountBalance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions(){
         return accountTransactions;
     }
@@ -101,12 +84,12 @@ public class Account implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(memberID, account.memberID) && Objects.equals(accountTypeId, account.accountTypeId) && Objects.equals(accountBalance, account.accountBalance);
+        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(memberID, account.memberID) && Objects.equals(type, account.type) && Objects.equals(balance, account.balance) && Objects.equals(accountTransactions, account.accountTransactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, memberID, accountTypeId, accountBalance);
+        return Objects.hash(accountNumber, memberID, type, balance, accountTransactions);
     }
 
     @Override
@@ -114,8 +97,9 @@ public class Account implements Serializable {
         return "Account{" +
                 "accountNumber=" + accountNumber +
                 ", memberID=" + memberID +
-                ", accountTypeId=" + accountTypeId +
-                ", accountBalance=" + accountBalance +
+                ", type='" + type + '\'' +
+                ", balance=" + balance +
+                ", accountTransactions=" + accountTransactions +
                 '}';
     }
 }
