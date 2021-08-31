@@ -19,12 +19,12 @@ public class CreateMemberFlowImpl implements CreateMemberFlow {
         this.memberTranslator = memberTranslator;
     }
 
-    // Create a new Member ?????
+    // Create a new Member
     @Override
-    public MemberDto create(MemberDto member){
-        if(null == member.getMemFirstName()){
-            member.setMemFirstName("Caitlyn");
+    public MemberDto create(MemberDto memberDto){
+        if(null == memberDto.getMemFirstName()){
+            memberDto.setMemFirstName("Caitlyn");
         }
-        return memberTranslator.create(member);
+        return memberTranslator.create(memberDto);
     }
 }

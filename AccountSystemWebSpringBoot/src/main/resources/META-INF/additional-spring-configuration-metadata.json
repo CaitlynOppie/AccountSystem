@@ -10,10 +10,14 @@
       "type": "java.lang.String",
       "description": "Description for swagger.application.description."
     },
-
     {
       "name": "swagger.application.version",
       "type": "java.lang.String",
       "description": "Description for swagger.application.version."
+    },
+    {
+      "name": "server.error.include-message",
+      "type": "java.lang.String",
+      "description": "Description for server.error.include-message."
     }
   ] }

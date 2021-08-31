@@ -11,8 +11,8 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 7965908118439354885L;
     @Id
-    @SequenceGenerator(name = "ACC_GENERIC_SEQ", sequenceName = "ACCOUNT.ACC_GENERIC_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_GENERIC_SEQ")
+    @SequenceGenerator(name = "DIS_GENERIC_SEQ", sequenceName = "DISCOVERY.DIS_GENERIC_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DIS_GENERIC_SEQ")
     @Column(name = "ACCOUNT_NUMBER")
     private Integer accountNumber;
 
@@ -26,8 +26,8 @@ public class Account implements Serializable {
     @Column(name = "BALANCE")
     private double balance;
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<AccountTransaction> accountTransactions;
+    @OneToMany(targetEntity = Transaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private Set<Transaction> transactions;
 
     public Account() {
     }
@@ -71,12 +71,12 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
-    public Set<AccountTransaction> getAccountTransactions(){
-        return accountTransactions;
+    public Set<Transaction> getAccountTransactions(){
+        return transactions;
     }
 
-    public void setAccountTransactions(Set<AccountTransaction> accountTransactions){
-        this.accountTransactions = accountTransactions;
+    public void setAccountTransactions(Set<Transaction> transactions){
+        this.transactions = transactions;
     }
 
     @Override
@@ -84,12 +84,12 @@ public class Account implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(memberID, account.memberID) && Objects.equals(type, account.type) && Objects.equals(balance, account.balance) && Objects.equals(accountTransactions, account.accountTransactions);
+        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(memberID, account.memberID) && Objects.equals(type, account.type) && Objects.equals(balance, account.balance) && Objects.equals(transactions, account.transactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, memberID, type, balance, accountTransactions);
+        return Objects.hash(accountNumber, memberID, type, balance, transactions);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class Account implements Serializable {
                 ", memberID=" + memberID +
                 ", type='" + type + '\'' +
                 ", balance=" + balance +
-                ", accountTransactions=" + accountTransactions +
+                ", accountTransactions=" + transactions +
                 '}';
     }
 }

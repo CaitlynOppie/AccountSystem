@@ -1,16 +1,20 @@
 package za.ac.nwu.as.translator.flow;
 
+import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.MemberDto;
 
 import java.util.List;
 
+@Component
 public interface MemberTranslator {
 
     List<MemberDto> getAllMembers();
 
-    MemberDto create(MemberDto member);
+    MemberDto create(MemberDto memberDto);
 
-    MemberDto getMemberByMemberID(Long memberID);
+    MemberDto getMemberByID(Integer memberID);
 
-    MemberDto getMemberByMemberIDNativeQuery(Long memberID);
+    MemberDto getMemberByEmail(String memEmail);
+
+    MemberDto getMemberIDByEmail(String memEmail);
 }

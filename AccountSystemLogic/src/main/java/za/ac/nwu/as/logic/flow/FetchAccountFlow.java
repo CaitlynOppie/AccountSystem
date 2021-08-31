@@ -7,5 +7,14 @@ import java.util.List;
 public interface FetchAccountFlow {
     List<AccountDto> getAllAccounts();
 
-    AccountDto getAccountByAccountNumber(Long accountNumber);
+    AccountDto getAccountByMemID(Integer memberID);
+
+    AccountDto getAccountNumByMemID(Integer memberID);
+
+    AccountDto getAccountByAccNum(Integer accountNumber);
+
+    AccountDto getAccountTypeByAccNum(Integer accountNumber);
+
+    AccountDto getBalanceByAccNum(Integer accountNumber);
+
 }

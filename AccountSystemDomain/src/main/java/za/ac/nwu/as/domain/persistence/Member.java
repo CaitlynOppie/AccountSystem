@@ -11,10 +11,10 @@ public class Member implements Serializable {
 
     private static final long serialVersionUID = -5347390031256184618L;
     @Id
-    @SequenceGenerator(name = "ACC_GENERIC_SEQ", sequenceName = "ACCOUNT.ACC_GENERIC_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_GENERIC_SEQ")
+    @SequenceGenerator(name = "DIS_GENERIC_SEQ", sequenceName = "DISCOVERY.DIS_GENERIC_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DIS_GENERIC_SEQ")
     @Column(name = "MEMBER_ID")
-    private Long memID;
+    private Integer memberID;
 
     @Column(name = "MEMBER_FIRST_NAME")
     private String memFirstName;
@@ -28,34 +28,30 @@ public class Member implements Serializable {
     @Column(name = "MEMBER_PHONE")
     private String memPhone;
 
-    private Set<AccountTransaction> accountTransactions;
+    @OneToMany(targetEntity = Transaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private Set<Transaction> transactions;
+
+    @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "accountNumber", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<Account> account;
 
-
-    public Member(Long memID, String memFirstName, String memLastName, String memEmail, String memPhone) {
-        this.memID = memID;
-        this.memFirstName = memFirstName;
-        this.memLastName = memLastName;
-        this.memEmail = memEmail;
-        this.memPhone = memPhone;
-    }
 
     public Member() {
     }
 
-    public Member(String memFirstName, String memLastName, String memEmail, String memPhone) {
+    public Member(Integer memberID, String memFirstName, String memLastName, String memEmail, String memPhone) {
+        this.memberID = memberID;
         this.memFirstName = memFirstName;
         this.memLastName = memLastName;
         this.memEmail = memEmail;
         this.memPhone = memPhone;
     }
 
-    public Long getMemID() {
-        return memID;
+    public Integer getMemberID() {
+        return memberID;
     }
 
-    public void setMemID(Long memID) {
-        this.memID = memID;
+    public void setMemberID(Integer memberID) {
+        this.memberID = memberID;
     }
 
     public String getMemFirstName() {
@@ -90,16 +86,14 @@ public class Member implements Serializable {
         this.memPhone = memPhone;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    public Set<AccountTransaction> getAccountTransactions(){
-        return accountTransactions;
+    public Set<Transaction> getAccountTransactions(){
+        return transactions;
     }
 
-    public void setAccountTransactions(Set<AccountTransaction> accountTransactions){
-        this.accountTransactions = accountTransactions;
+    public void setAccountTransactions(Set<Transaction> transactions){
+        this.transactions = transactions;
     }
 
-    @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "memberID", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<Account> getAccount(){
         return account;
     }
@@ -113,18 +107,18 @@ public class Member implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return Objects.equals(memID, member.memID) && Objects.equals(memFirstName, member.memFirstName) && Objects.equals(memLastName, member.memLastName) && Objects.equals(memEmail, member.memEmail) && Objects.equals(memPhone, member.memPhone);
+        return Objects.equals(memberID, member.memberID) && Objects.equals(memFirstName, member.memFirstName) && Objects.equals(memLastName, member.memLastName) && Objects.equals(memEmail, member.memEmail) && Objects.equals(memPhone, member.memPhone) && Objects.equals(transactions, member.transactions) && Objects.equals(account, member.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memID, memFirstName, memLastName, memEmail, memPhone);
+        return Objects.hash(memberID, memFirstName, memLastName, memEmail, memPhone, transactions, account);
     }
 
     @Override
     public String toString() {
         return "Member{" +
-                "memID=" + memID +
+                "memberID=" + memberID +
                 ", memFirstName='" + memFirstName + '\'' +
                 ", memLastName='" + memLastName + '\'' +
                 ", memEmail='" + memEmail + '\'' +

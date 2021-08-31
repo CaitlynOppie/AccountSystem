@@ -5,7 +5,12 @@ import za.ac.nwu.as.domain.dto.MemberDto;
 import java.util.List;
 
 public interface FetchMemberFlow {
+
     List<MemberDto> getAllMembers();
 
-    MemberDto getMemberByMemberID(Long memberID);
+    MemberDto getMemberByID(Integer memberID);
+
+    MemberDto getMemberByEmail(String memEmail);
+
+    MemberDto getMemberIDByEmail(String memEmail);
 }

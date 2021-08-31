@@ -1,16 +1,25 @@
 package za.ac.nwu.as.translator.flow;
 
+import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.AccountDto;
+import za.ac.nwu.as.domain.dto.MemberDto;
 
 import java.util.List;
 
+@Component
 public interface AccountTranslator {
 
-    List<AccountDto> getAllMAccounts();
+    List<AccountDto> getAllAccounts();
 
     AccountDto create(AccountDto accountDto);
 
-    AccountDto getAccountByAccountNumber(Long accountNumber);
+    AccountDto getAccountByMemID(Integer memberID);
 
-    AccountDto getAccountByAccountNumberNativeQuery(Long accountNumber);
+    AccountDto getAccountNumByMemID(Integer memberID);
+
+    AccountDto getAccountByAccNum(Integer accountNumber);
+
+    AccountDto getAccountTypeByAccNum(Integer accountNumber);
+
+    AccountDto getBalanceByAccNum(Integer accountNumber);
 }

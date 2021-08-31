@@ -4,48 +4,35 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import za.ac.nwu.as.domain.persistence.Account;
-import za.ac.nwu.as.domain.persistence.AccountTransaction;
-import za.ac.nwu.as.domain.persistence.AccountType;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    @Query(value = "SELECT" +
-            " ACCOUNT_NUMBER," +
-            "MEMBER_ID,"+
-            "ACCOUNT_TYPE_ID,"+
-            "BALANCE" +
-            "FROM" +
-            "ACCOUNT.ACCOUNT" +
-            "WHERE ACCOUNT_NUMBER = :accountNumber", nativeQuery = true)
-    Account getAccountBalanceByAccountNumberNativeQuery(Long accountNumber);
 
-    @Query(value = "SELECT" +
-            " ACCOUNT_NUMBER," +
-            "MEMBER_ID,"+
-            "ACCOUNT_TYPE_ID,"+
-            "BALANCE" +
-            "FROM" +
-            "ACCOUNT.ACCOUNT" +
-            "WHERE MEMBER_ID = :memberID", nativeQuery = true)
-    Account getAccountBalanceByMemberNativeQuery(Long memberID);
+    // get account by member ID
+    @Query(value = "SELECT a FROM Account a WHERE a.memberID = :memberID")
+    Account getAccountByMemID(Integer memberID);
 
-    @Query(value = "SELECT" +
-            " ACCOUNT_NUMBER," +
-            "MEMBER_ID,"+
-            "ACCOUNT_TYPE_ID,"+
-            "BALANCE" +
-            "FROM" +
-            "ACCOUNT.ACCOUNT" +
-            "WHERE MEMBER_ID = :memberID AND ACCOUNT_TYPE_ID = :accountTypeID", nativeQuery = true)
-    Account getAccountBalanceByMemberAndAccountTypeNativeQuery(Long memberID, Long accountTypeID);
+    // get account number by member ID
+    @Query(value = "SELECT a.accountNumber FROM Account a WHERE a.memberID = :memberID")
+    Account getAccountNumByMemID(Integer memberID);
 
-    @Query(value = "UPDATE ACCOUNT.ACCOUNT set BALANCE = BALANCE + :amount WHERE MEMBER_ID = :memberID", nativeQuery = true)
-    Account setAccountBalanceByMemberAndAmountNativeQuery(Long memberID, Long amount);
+    // get account by account number
+    @Query(value = "SELECT a FROM Account a WHERE a.accountNumber = :accountNumber")
+    Account getAccountByAccNum(Integer accountNumber);
 
-    // twee queries in een (insert into accountTransaction + today's date??)
-    
-    //Queries to do: insert new entry into accountTra
+    // get account type by account number
+    @Query(value = "SELECT a.type FROM Account a WHERE a.accountNumber = :accountNumber")
+    Account getAccountTypeByAccNum(Integer accountNumber);
+
+    //view balance of account
+    @Query(value = "SELECT a.balance FROM Account a WHERE a.accountNumber = :accountNumber")
+    Account getBalanceByAccNum(Integer accountNumber);
+
+    //update balance (add & subtract)
+    @Query(value = "UPDATE Account a SET a.balance = :amount + a.balance WHERE a.accountNumber = :accountNumber")
+    Account setBalanceByAccNum(Integer accountNumber, double amount);
+
 
 }
 
