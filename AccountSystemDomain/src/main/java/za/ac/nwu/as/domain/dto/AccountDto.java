@@ -109,7 +109,7 @@ public class AccountDto implements Serializable {
 
     @JsonIgnore
     public Account getAccount(){
-        return new Account(getAccountNumber(), getMemberID(), getType(), getBalance());
+        return new Account(getMemberID(), getType(), getBalance());
     }
 
     @Override

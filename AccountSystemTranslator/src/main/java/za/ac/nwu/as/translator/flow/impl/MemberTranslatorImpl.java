@@ -25,8 +25,8 @@ public class MemberTranslatorImpl implements MemberTranslator {
     public List<MemberDto> getAllMembers() {
         List<MemberDto> memberDtos = new ArrayList<>();
         try{
-            for(Member account : memberRepository.findAll()){
-                memberDtos.add(new MemberDto(account));
+            for(Member member : memberRepository.findAll()){
+                memberDtos.add(new MemberDto(member));
             }
         }catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);

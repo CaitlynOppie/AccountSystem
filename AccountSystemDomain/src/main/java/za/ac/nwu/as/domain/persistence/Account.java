@@ -11,8 +11,7 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 7965908118439354885L;
     @Id
-    @SequenceGenerator(name = "DIS_GENERIC_SEQ", sequenceName = "DISCOVERY.DIS_GENERIC_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DIS_GENERIC_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ACCOUNT_NUMBER")
     private Integer accountNumber;
 
@@ -32,11 +31,25 @@ public class Account implements Serializable {
     public Account() {
     }
 
+    public Account(Member memberID, String type, double balance) {
+        this.memberID = memberID;
+        this.type = type;
+        this.balance = balance;
+    }
+
     public Account(Integer accountNumber, Member memberID, String type, double balance) {
         this.accountNumber = accountNumber;
         this.memberID = memberID;
         this.type = type;
         this.balance = balance;
+    }
+
+    public Account(Integer accountNumber, Member memberID, String type, double balance, Set<Transaction> transactions) {
+        this.accountNumber = accountNumber;
+        this.memberID = memberID;
+        this.type = type;
+        this.balance = balance;
+        this.transactions = transactions;
     }
 
     public Integer getAccountNumber() {

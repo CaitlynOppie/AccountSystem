@@ -11,8 +11,7 @@ public class Member implements Serializable {
 
     private static final long serialVersionUID = -5347390031256184618L;
     @Id
-    @SequenceGenerator(name = "DIS_GENERIC_SEQ", sequenceName = "DISCOVERY.DIS_GENERIC_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DIS_GENERIC_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
     private Integer memberID;
 
@@ -36,6 +35,10 @@ public class Member implements Serializable {
 
 
     public Member() {
+    }
+
+    public Member(Integer memberID) {
+        this.memberID = memberID;
     }
 
     public Member(Integer memberID, String memFirstName, String memLastName, String memEmail, String memPhone) {
