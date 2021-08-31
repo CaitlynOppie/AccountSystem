@@ -94,24 +94,5 @@ public class MemberController {
         GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    @GetMapping("/getMemberIDByEmail/{memEmail}")
-    @ApiOperation(value = "Fetches the specified Member ID using the email.", notes = "Fetches the Member ID corresponding to the given email")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Member ID returned", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-    })
-    public ResponseEntity<GeneralResponse<MemberDto>> getMemberIDByEmail(
-            @ApiParam(value = "The member email that identifies the Member.",
-                    example = "caitlyn.opperman@gmail.com",
-                    name = "memEmail",
-                    required = true)
-            @PathVariable("memEmail") String memEmail){
-        MemberDto member = fetchMemberFlow.getMemberIDByEmail(memEmail);
-        GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
 
 }

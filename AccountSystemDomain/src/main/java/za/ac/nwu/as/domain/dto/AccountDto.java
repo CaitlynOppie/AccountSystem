@@ -12,7 +12,6 @@ import java.util.Objects;
 @ApiModel(value = "Account", description = "A DTO that represents the Account")
 public class AccountDto implements Serializable {
 
-    private Integer accountNumber;
     private Member memberID;
     private String type;
     private double balance;
@@ -20,8 +19,7 @@ public class AccountDto implements Serializable {
     public AccountDto() {
     }
 
-    public AccountDto(Integer accountNumber, Member memberID, String type, double balance) {
-        this.accountNumber = accountNumber;
+    public AccountDto(Member memberID, String type, double balance) {
         this.memberID = memberID;
         this.type = type;
         this.balance = balance;
@@ -29,29 +27,12 @@ public class AccountDto implements Serializable {
 
     public AccountDto(Account account)
     {
-        this.setAccountNumber(account.getAccountNumber());
         this.setMemberID(account.getMemberID());
         this.setType(account.getType());
         this.setBalance(account.getBalance());
     }
 
     @ApiModelProperty(position = 1,
-            value = "Account accountNumber",
-            name = "accountNumber",
-            notes = "Uniquely identifies the account",
-            dataType = "java.lang.Integer",
-            example = "123456789",
-            required = true)
-
-    public Integer getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(Integer accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    @ApiModelProperty(position = 2,
             value = "Account memberID",
             name = "memberID",
             notes = "Uniquely identifies the member of the account",
@@ -67,7 +48,7 @@ public class AccountDto implements Serializable {
         this.memberID = memberID;
     }
 
-    @ApiModelProperty(position = 3,
+    @ApiModelProperty(position = 2,
             value = "Account type",
             name = "type",
             notes = "Identifies the type of the account",
@@ -83,7 +64,7 @@ public class AccountDto implements Serializable {
         this.type = type;
     }
 
-    @ApiModelProperty(position = 4,
+    @ApiModelProperty(position = 3,
             value = "Account balance",
             name = "balance",
             notes = "Provides the balance of the account",
@@ -104,7 +85,7 @@ public class AccountDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountDto that = (AccountDto) o;
-        return Double.compare(that.balance, balance) == 0 && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(memberID, that.memberID) && Objects.equals(type, that.type);
+        return Double.compare(that.balance, balance) == 0  && Objects.equals(memberID, that.memberID) && Objects.equals(type, that.type);
     }
 
     @JsonIgnore
@@ -114,14 +95,13 @@ public class AccountDto implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, memberID, type, balance);
+        return Objects.hash(memberID, type, balance);
     }
 
     @Override
     public String toString() {
         return "AccountDto{" +
-                "accountNumber=" + accountNumber +
-                ", memberID=" + memberID +
+                "memberID=" + memberID +
                 ", type='" + type + '\'' +
                 ", balance=" + balance +
                 '}';

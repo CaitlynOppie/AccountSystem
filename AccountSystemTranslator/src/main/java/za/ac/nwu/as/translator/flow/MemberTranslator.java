@@ -16,5 +16,4 @@ public interface MemberTranslator {
 
     MemberDto getMemberByEmail(String memEmail);
 
-    MemberDto getMemberIDByEmail(String memEmail);
 }

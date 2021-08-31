@@ -13,8 +13,6 @@ public interface FetchTransactionFlow {
 
     TransactionDto getTransactionByDate(LocalDate transactionDate);
 
-    TransactionDto getTransactionByTransactionID(Integer transactionID);
-
     TransactionDto getTransactionByMemID(Integer memberID);
 
 }

@@ -16,7 +16,4 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "SELECT m FROM Member m WHERE m.memEmail = :memEmail")
     Member getMemberByEmail(String memEmail);
 
-    // get member ID by email
-    @Query(value = "SELECT m.memberID FROM Member m WHERE m.memEmail = :memEmail")
-    Member getMemberIDByEmail(String memEmail);
 }

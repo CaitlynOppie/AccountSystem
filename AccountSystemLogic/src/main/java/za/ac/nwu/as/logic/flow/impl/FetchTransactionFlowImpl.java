@@ -35,11 +35,6 @@ public class FetchTransactionFlowImpl implements FetchTransactionFlow {
     }
 
     @Override
-    public TransactionDto getTransactionByTransactionID(Integer transactionID) {
-        return transactionTranslator.getTransactionByTransactionID(transactionID);
-    }
-
-    @Override
     public TransactionDto getTransactionByMemID(Integer memberID) {
         return transactionTranslator.getTransactionByMemID(memberID);
     }

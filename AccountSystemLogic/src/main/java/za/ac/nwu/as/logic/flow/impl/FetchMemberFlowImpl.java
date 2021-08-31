@@ -33,10 +33,4 @@ public class FetchMemberFlowImpl implements FetchMemberFlow {
         return memberTranslator.getMemberByEmail(memEmail);
     }
 
-    @Override
-    public MemberDto getMemberIDByEmail(String memEmail) {
-        return memberTranslator.getMemberIDByEmail(memEmail);
-    }
-
-
 }

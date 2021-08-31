@@ -11,7 +11,6 @@ import java.util.Objects;
 @ApiModel(value = "Member", description = "A DTO that represents the Member")
 public class MemberDto {
 
-    public Integer memberID;
     public String memFirstName;
     public String memLastName;
     public String memEmail;
@@ -20,8 +19,7 @@ public class MemberDto {
     public MemberDto() {
     }
 
-    public MemberDto(Integer memberID, String memFirstName, String memLastName, String memEmail, String memPhone) {
-        this.memberID = memberID;
+    public MemberDto(String memFirstName, String memLastName, String memEmail, String memPhone) {
         this.memFirstName = memFirstName;
         this.memLastName = memLastName;
         this.memEmail = memEmail;
@@ -29,7 +27,6 @@ public class MemberDto {
     }
 
     public MemberDto(Member member){
-        this.setMemberID(member.getMemberID());
         this.setMemFirstName(member.getMemFirstName());
         this.setMemLastName(member.getMemLastName());
         this.setMemEmail(member.getMemEmail());
@@ -37,23 +34,6 @@ public class MemberDto {
     }
 
     @ApiModelProperty(position = 1,
-            value = "Member memberID",
-            name = "memberID",
-            notes = "Uniquely identifies the member",
-            dataType = "java.lang.Integer",
-            example = "1",
-            required = true)
-
-    public Integer getMemberID() {
-        return memberID;
-    }
-
-    public void setMemberID(Integer memberID) {
-        this.memberID = memberID;
-    }
-
-
-    @ApiModelProperty(position = 2,
             value = "Member memFirstName",
             name = "MemFirstName",
             notes = "Identifies the name of the member",
@@ -69,7 +49,7 @@ public class MemberDto {
         this.memFirstName = memFirstName;
     }
 
-    @ApiModelProperty(position = 3,
+    @ApiModelProperty(position = 2,
             value = "Member memLastName",
             name = "memLastName",
             notes = "Identifies the surname of the member",
@@ -85,7 +65,7 @@ public class MemberDto {
         this.memLastName = memLastName;
     }
 
-    @ApiModelProperty(position = 4,
+    @ApiModelProperty(position = 3,
             value = "Member memEmail",
             name = "memEmail",
             notes = "Identifies the email of the member",
@@ -101,7 +81,7 @@ public class MemberDto {
         this.memEmail = memEmail;
     }
 
-    @ApiModelProperty(position = 5,
+    @ApiModelProperty(position = 4,
             value = "Member memPhone",
             name = "memPhone",
             notes = "Identifies the phone number of the member",
@@ -118,26 +98,24 @@ public class MemberDto {
     }
 
     @JsonIgnore
-    public Member getMember(){return new Member(getMemberID(), getMemFirstName(), getMemLastName(), getMemEmail(), getMemPhone());}
+    public Member getMember(){return new Member(getMemFirstName(), getMemLastName(), getMemEmail(), getMemPhone());}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MemberDto memberDto = (MemberDto) o;
-        return Objects.equals(memberID, memberDto.memberID) && Objects.equals(memFirstName, memberDto.memFirstName) && Objects.equals(memLastName, memberDto.memLastName) && Objects.equals(memEmail, memberDto.memEmail) && Objects.equals(memPhone, memberDto.memPhone);
+        return Objects.equals(memFirstName, memberDto.memFirstName) && Objects.equals(memLastName, memberDto.memLastName) && Objects.equals(memEmail, memberDto.memEmail) && Objects.equals(memPhone, memberDto.memPhone);
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(memberID, memFirstName, memLastName, memEmail, memPhone);
+        return Objects.hash(memFirstName, memLastName, memEmail, memPhone);
     }
 
     @Override
     public String toString() {
         return "MemberDto{" +
-                "memberID=" + memberID +
-                ", memFirstName='" + memFirstName + '\'' +
+                "memFirstName='" + memFirstName + '\'' +
                 ", memLastName='" + memLastName + '\'' +
                 ", memEmail='" + memEmail + '\'' +
                 ", memPhone='" + memPhone + '\'' +

@@ -36,9 +36,9 @@ public class AccountController {
             @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
 
-    public ResponseEntity<GeneralResponse<String>> getAll() {
+    public ResponseEntity<GeneralResponse<List<AccountDto>>> getAll() {
     List<AccountDto> account = fetchAccountFlow.getAllAccounts();
-    GeneralResponse<String> response = new GeneralResponse<>(true,"No accounts found");
+    GeneralResponse<List<AccountDto>> response = new GeneralResponse<>(true,account);
     return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

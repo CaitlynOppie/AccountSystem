@@ -41,6 +41,13 @@ public class Member implements Serializable {
         this.memberID = memberID;
     }
 
+    public Member(String memFirstName, String memLastName, String memEmail, String memPhone) {
+        this.memFirstName = memFirstName;
+        this.memLastName = memLastName;
+        this.memEmail = memEmail;
+        this.memPhone = memPhone;
+    }
+
     public Member(Integer memberID, String memFirstName, String memLastName, String memEmail, String memPhone) {
         this.memberID = memberID;
         this.memFirstName = memFirstName;

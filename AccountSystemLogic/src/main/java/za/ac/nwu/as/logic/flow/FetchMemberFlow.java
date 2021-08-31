@@ -12,5 +12,4 @@ public interface FetchMemberFlow {
 
     MemberDto getMemberByEmail(String memEmail);
 
-    MemberDto getMemberIDByEmail(String memEmail);
 }

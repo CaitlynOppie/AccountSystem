@@ -11,7 +11,7 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 7965908118439354885L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACCOUNT_NUMBER")
     private Integer accountNumber;
 
@@ -35,6 +35,10 @@ public class Account implements Serializable {
         this.memberID = memberID;
         this.type = type;
         this.balance = balance;
+    }
+
+    public Account(Integer accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public Account(Integer accountNumber, Member memberID, String type, double balance) {

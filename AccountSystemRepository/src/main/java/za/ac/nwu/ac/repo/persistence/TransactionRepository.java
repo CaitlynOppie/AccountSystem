@@ -18,10 +18,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query(value = "SELECT t FROM Transaction t WHERE t.transactionDate = :transactionDate")
     Transaction getTransactionByDate(LocalDate transactionDate);
 
-    // Get transaction by transaction ID
-    @Query(value = "SELECT t FROM Transaction t WHERE t.transactionID = :transactionID")
-    Transaction getTransactionByTransactionID(Integer transactionID);
-
     //Get transaction by memberID
     @Query(value = "SELECT t FROM Transaction t WHERE t.memberID = :memberID")
     Transaction getTransactionByMemID(Integer memberID);

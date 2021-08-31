@@ -63,14 +63,4 @@ public class MemberTranslatorImpl implements MemberTranslator {
             throw new RuntimeException("Unable to read from the DB", e);
         }
     }
-
-    @Override
-    public MemberDto getMemberIDByEmail(String memEmail) {
-        try{
-            Member member = memberRepository.getMemberIDByEmail(memEmail);
-            return new MemberDto(member);
-        }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-    }
 }

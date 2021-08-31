@@ -40,9 +40,9 @@ public class TransactionController {
 //            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
 //            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
 //
-//    public ResponseEntity<GeneralResponse<String>> getAll() {
+//    public ResponseEntity<GeneralResponse<List<TransactionDto>>> getAll() {
 //        List<TransactionDto> transaction = fetchTransactionFlow.getAllTransactions();
-//        GeneralResponse<String> response = new GeneralResponse<>(true,"No transactions found");
+//        GeneralResponse<List<TransactionDto>> response = new GeneralResponse<>(true,transaction);
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 //
@@ -95,25 +95,6 @@ public class TransactionController {
 //                    required = true)
 //            @PathVariable("transactionDate")LocalDate transactionDate){
 //        TransactionDto transaction = fetchTransactionFlow.getTransactionByDate(transactionDate);
-//        GeneralResponse<TransactionDto> response = new GeneralResponse<>(true, transaction);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/getTransactionByTransactionID/{transactionID}")
-//    @ApiOperation(value = "Fetches the specified transactions using the transaction ID.", notes = "Fetches the transactions corresponding to the given transactionID")
-//    @ApiResponses(value ={
-//            @ApiResponse(code = 200, message = "Transactions returned", response = GeneralResponse.class),
-//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-//            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-//    })
-//    public ResponseEntity<GeneralResponse<TransactionDto>> getTransactionByTransactionID(
-//            @ApiParam(value = "The transactionID that identifies the Transactions.",
-//                    example = "23",
-//                    name = "transactionID",
-//                    required = true)
-//            @PathVariable("transactionID")Integer transactionID){
-//        TransactionDto transaction = fetchTransactionFlow.getTransactionByTransactionID(transactionID);
 //        GeneralResponse<TransactionDto> response = new GeneralResponse<>(true, transaction);
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }

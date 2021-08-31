@@ -21,8 +21,8 @@ public class CreateAccountFlowImpl implements CreateAccountFlow {
 
     @Override
     public AccountDto create(AccountDto accountDto) {
-        if(null == accountDto.getAccountNumber()){
-            accountDto.setAccountNumber(1);
+        if(null == accountDto.getType()){
+            accountDto.setType("Miles");
         }
         return accountTranslator.create(accountDto);
     }

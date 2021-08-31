@@ -2,7 +2,6 @@ package za.ac.nwu.as.translator.flow;
 
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.AccountDto;
-import za.ac.nwu.as.domain.dto.MemberDto;
 
 import java.util.List;
 

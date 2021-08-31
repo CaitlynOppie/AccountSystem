@@ -7,6 +7,7 @@ import za.ac.nwu.as.logic.flow.CreateTransactionFlow;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 @Transactional
 @Component("createATransactionFlowName")
@@ -20,8 +21,8 @@ public class CreateTransactionFlowImpl implements CreateTransactionFlow {
 
     @Override
     public TransactionDto create(TransactionDto transactionDto) {
-        if(null == transactionDto.getTransactionID()){
-            transactionDto.setTransactionID(1);
+        if(null == transactionDto.getTransactionDate()){
+            transactionDto.setTransactionDate(LocalDate.now());
         }
         return transactionTranslator.create(transactionDto);
     }
