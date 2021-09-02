@@ -4,7 +4,7 @@ import za.ac.nwu.as.domain.dto.AccountDto;
 
 import java.util.List;
 
-public interface FetchAccountFlow {
+public interface GetAccountService {
     List<AccountDto> getAllAccounts();
 
     AccountDto getAccountByMemID(Integer memberID);

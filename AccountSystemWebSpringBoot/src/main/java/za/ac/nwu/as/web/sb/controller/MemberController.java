@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.as.domain.dto.MemberDto;
 import za.ac.nwu.as.domain.service.GeneralResponse;
-import za.ac.nwu.as.logic.flow.CreateMemberFlow;
-import za.ac.nwu.as.logic.flow.FetchMemberFlow;
+import za.ac.nwu.as.logic.flow.CreateMemberService;
+import za.ac.nwu.as.logic.flow.GetMemberService;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ import java.util.List;
 @RequestMapping("/member")
 public class MemberController {
 
-    private final FetchMemberFlow fetchMemberFlow;
-    private final CreateMemberFlow createMemberFlow;
+    private final GetMemberService getMemberService;
+    private final CreateMemberService createMemberService;
 
     @Autowired
-    public MemberController(FetchMemberFlow fetchMemberFlow, CreateMemberFlow createMemberFlow) {
-        this.fetchMemberFlow = fetchMemberFlow;
-        this.createMemberFlow = createMemberFlow;
+    public MemberController(GetMemberService getMemberService, CreateMemberService createMemberService) {
+        this.getMemberService = getMemberService;
+        this.createMemberService = createMemberService;
     }
 
     @GetMapping("/all")
@@ -37,7 +37,7 @@ public class MemberController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
 
     public ResponseEntity<GeneralResponse<List<MemberDto>>> getAll() {
-        List<MemberDto> member = fetchMemberFlow.getAllMembers();
+        List<MemberDto> member = getMemberService.getAllMembers();
         GeneralResponse<List<MemberDto>> response = new GeneralResponse<>(true,member);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -52,7 +52,7 @@ public class MemberController {
     public ResponseEntity<GeneralResponse<MemberDto>> create(
             @ApiParam(value = "Request body to create a new Member.", required = true)
             @RequestBody MemberDto member) {
-        MemberDto memberResponse = createMemberFlow.create(member);
+        MemberDto memberResponse = createMemberService.create(member);
         GeneralResponse<MemberDto> response = new GeneralResponse<>(true, memberResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -71,7 +71,7 @@ public class MemberController {
                     name = "memberID",
                     required = true)
             @PathVariable("memberID") Integer memberID){
-        MemberDto member = fetchMemberFlow.getMemberByID(memberID);
+        MemberDto member = getMemberService.getMemberByID(memberID);
         GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -90,7 +90,7 @@ public class MemberController {
                     name = "memEmail",
                     required = true)
             @PathVariable("memEmail") String memEmail){
-        MemberDto member = fetchMemberFlow.getMemberByEmail(memEmail);
+        MemberDto member = getMemberService.getMemberByEmail(memEmail);
         GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

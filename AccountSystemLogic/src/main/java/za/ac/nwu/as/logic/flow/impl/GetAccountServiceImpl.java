@@ -3,18 +3,18 @@ package za.ac.nwu.as.logic.flow.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.AccountDto;
-import za.ac.nwu.as.logic.flow.FetchAccountFlow;
+import za.ac.nwu.as.logic.flow.GetAccountService;
 import za.ac.nwu.as.translator.flow.AccountTranslator;
 
 import java.util.List;
 
 @Component
-public class FetchAccountFlowImpl implements FetchAccountFlow {
+public class GetAccountServiceImpl implements GetAccountService {
 
     private final AccountTranslator accountTranslator;
 
     @Autowired
-    public FetchAccountFlowImpl(AccountTranslator accountTranslator){
+    public GetAccountServiceImpl(AccountTranslator accountTranslator){
         this.accountTranslator = accountTranslator;
     }
 

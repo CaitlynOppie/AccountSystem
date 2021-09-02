@@ -40,6 +40,7 @@ public class AccountTranslatorImpl implements AccountTranslator {
             return new AccountDto(account);
         }catch (Exception e){
             throw new RuntimeException("Unable to save to the DB", e);
+            //rollback
         }
     }
 

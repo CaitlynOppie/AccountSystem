@@ -6,7 +6,7 @@ import za.ac.nwu.as.translator.flow.TransactionTranslator;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FetchTransactionFlow {
+public interface GetTransactionService {
     List<TransactionDto> getAllTransactions();
 
     TransactionDto getTransactionByAccountNumber(Integer accountNumber);

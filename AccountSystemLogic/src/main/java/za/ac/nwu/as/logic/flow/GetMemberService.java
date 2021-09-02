@@ -4,7 +4,7 @@ import za.ac.nwu.as.domain.dto.MemberDto;
 
 import java.util.List;
 
-public interface FetchMemberFlow {
+public interface GetMemberService {
 
     List<MemberDto> getAllMembers();
 

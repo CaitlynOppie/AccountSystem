@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.as.domain.dto.AccountDto;
 import za.ac.nwu.as.domain.service.GeneralResponse;
-import za.ac.nwu.as.logic.flow.CreateAccountFlow;
-import za.ac.nwu.as.logic.flow.FetchAccountFlow;
+import za.ac.nwu.as.logic.flow.CreateAccountService;
+import za.ac.nwu.as.logic.flow.GetAccountService;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ import java.util.List;
 @RequestMapping("/account")
 public class AccountController {
 
-    private final FetchAccountFlow fetchAccountFlow;
-    private final CreateAccountFlow createAccountFlow;
+    private final GetAccountService getAccountService;
+    private final CreateAccountService createAccountService;
 
     @Autowired
-    public AccountController(FetchAccountFlow fetchAccountFlow, CreateAccountFlow createAccountFlow) {
-        this.fetchAccountFlow = fetchAccountFlow;
-        this.createAccountFlow = createAccountFlow;
+    public AccountController(GetAccountService getAccountService, CreateAccountService createAccountService) {
+        this.getAccountService = getAccountService;
+        this.createAccountService = createAccountService;
     }
 
     @GetMapping("/all")
@@ -37,7 +37,7 @@ public class AccountController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
 
     public ResponseEntity<GeneralResponse<List<AccountDto>>> getAll() {
-    List<AccountDto> account = fetchAccountFlow.getAllAccounts();
+    List<AccountDto> account = getAccountService.getAllAccounts();
     GeneralResponse<List<AccountDto>> response = new GeneralResponse<>(true,account);
     return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -52,7 +52,7 @@ public class AccountController {
     public ResponseEntity<GeneralResponse<AccountDto>> create(
             @ApiParam(value = "Request body to create a new Account.", required = true)
             @RequestBody AccountDto account) {
-    AccountDto accountResponse = createAccountFlow.create(account);
+    AccountDto accountResponse = createAccountService.create(account);
     GeneralResponse<AccountDto> response = new GeneralResponse<>(true, accountResponse);
     return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -71,7 +71,7 @@ public class AccountController {
             name = "memberID",
             required = true)
             @PathVariable("memberID") Integer memberID){
-        AccountDto account = fetchAccountFlow.getAccountByMemID(memberID);
+        AccountDto account = getAccountService.getAccountByMemID(memberID);
         GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -90,7 +90,7 @@ public class AccountController {
                     name = "memberID",
                     required = true)
             @PathVariable("memberID") Integer memberID){
-        AccountDto account = fetchAccountFlow.getAccountNumByMemID(memberID);
+        AccountDto account = getAccountService.getAccountNumByMemID(memberID);
         GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -109,7 +109,7 @@ public class AccountController {
                     name = "accountNumber",
                     required = true)
             @PathVariable("accountNumber") Integer accountNumber){
-        AccountDto account = fetchAccountFlow.getAccountByAccNum(accountNumber);
+        AccountDto account = getAccountService.getAccountByAccNum(accountNumber);
         GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -128,7 +128,7 @@ public class AccountController {
                     name = "accountNumber",
                     required = true)
             @PathVariable("accountNumber") Integer accountNumber){
-        AccountDto account = fetchAccountFlow.getAccountTypeByAccNum(accountNumber);
+        AccountDto account = getAccountService.getAccountTypeByAccNum(accountNumber);
         GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -147,7 +147,7 @@ public class AccountController {
                     name = "accountNumber",
                     required = true)
             @PathVariable("accountNumber") Integer accountNumber){
-        AccountDto account = fetchAccountFlow.getBalanceByAccNum(accountNumber);
+        AccountDto account = getAccountService.getBalanceByAccNum(accountNumber);
         GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

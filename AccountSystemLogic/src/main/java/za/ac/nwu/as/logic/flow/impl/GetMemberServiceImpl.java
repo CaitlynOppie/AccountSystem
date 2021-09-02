@@ -3,18 +3,18 @@ package za.ac.nwu.as.logic.flow.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.MemberDto;
-import za.ac.nwu.as.logic.flow.FetchMemberFlow;
+import za.ac.nwu.as.logic.flow.GetMemberService;
 import za.ac.nwu.as.translator.flow.MemberTranslator;
 
 import java.util.List;
 
 @Component
-public class FetchMemberFlowImpl implements FetchMemberFlow {
+public class GetMemberServiceImpl implements GetMemberService {
 
     private final MemberTranslator memberTranslator;
 
     @Autowired
-    public FetchMemberFlowImpl(MemberTranslator memberTranslator){
+    public GetMemberServiceImpl(MemberTranslator memberTranslator){
         this.memberTranslator = memberTranslator;
     }
 
