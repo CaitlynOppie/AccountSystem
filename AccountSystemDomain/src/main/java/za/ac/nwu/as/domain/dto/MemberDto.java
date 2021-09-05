@@ -86,7 +86,7 @@ public class MemberDto {
             name = "memPhone",
             notes = "Identifies the phone number of the member",
             dataType = "java.lang.String",
-            example = "071 245 7895",
+            example = "0712457895",
             required = true)
 
     public String getMemPhone() {

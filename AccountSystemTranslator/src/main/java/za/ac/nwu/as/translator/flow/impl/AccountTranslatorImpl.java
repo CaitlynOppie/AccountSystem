@@ -54,35 +54,35 @@ public class AccountTranslatorImpl implements AccountTranslator {
         }
     }
 
-    @Override
-    public AccountDto getAccountNumByMemID(Integer memberID) {
-        try{
-            Account account = accountRepository.getAccountNumByMemID(memberID);
-            return new AccountDto(account);
-        }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-    }
+//    @Override
+//    public AccountDto getAccountNumByMemID(Integer memberID) {
+//        try{
+//            Account account = accountRepository.getAccountNumByMemID(memberID);
+//            return new AccountDto(account);
+//        }catch (Exception e){
+//            throw new RuntimeException("Unable to read from the DB", e);
+//        }
+//    }
 
-    @Override
-    public AccountDto getAccountByAccNum(Integer accountNumber) {
-        try{
-            Account account = accountRepository.getAccountByAccNum(accountNumber);
-            return new AccountDto(account);
-        }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-    }
-
-    @Override
-    public AccountDto getAccountTypeByAccNum(Integer accountNumber) {
-        try{
-            Account account = accountRepository.getAccountTypeByAccNum(accountNumber);
-            return new AccountDto(account);
-        }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-    }
+//    @Override
+//    public AccountDto getAccountByAccNum(Integer accountNumber) {
+//        try{
+//            Account account = accountRepository.getAccountByAccNum(accountNumber);
+//            return new AccountDto(account);
+//        }catch (Exception e){
+//            throw new RuntimeException("Unable to read from the DB", e);
+//        }
+//    }
+//
+//    @Override
+//    public AccountDto getAccountTypeByAccNum(Integer accountNumber) {
+//        try{
+//            Account account = accountRepository.getAccountTypeByAccNum(accountNumber);
+//            return new AccountDto(account);
+//        }catch (Exception e){
+//            throw new RuntimeException("Unable to read from the DB", e);
+//        }
+//    }
 
     @Override
     public AccountDto getBalanceByAccNum(Integer accountNumber) {

@@ -63,14 +63,4 @@ public class TransactionTranslatorImpl implements TransactionTranslator {
             throw new RuntimeException("Unable to read from the DB", e);
         }
     }
-
-    @Override
-    public TransactionDto getTransactionByMemID(Integer memberID) {
-        try{
-            Transaction transaction = transactionRepository.getTransactionByMemID(memberID);
-            return new TransactionDto(transaction);
-        }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-    }
 }

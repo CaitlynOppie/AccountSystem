@@ -1,9 +1,9 @@
-package za.ac.nwu.as.logic.flow.impl;
+package za.ac.nwu.as.logic.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.MemberDto;
-import za.ac.nwu.as.logic.flow.CreateMemberService;
+import za.ac.nwu.as.logic.service.CreateMemberService;
 import za.ac.nwu.as.translator.flow.MemberTranslator;
 
 import javax.transaction.Transactional;

@@ -1,4 +1,4 @@
-package za.ac.nwu.as.logic.flow;
+package za.ac.nwu.as.logic.service;
 
 import za.ac.nwu.as.domain.dto.AccountDto;
 
@@ -9,11 +9,11 @@ public interface GetAccountService {
 
     AccountDto getAccountByMemID(Integer memberID);
 
-    AccountDto getAccountNumByMemID(Integer memberID);
-
-    AccountDto getAccountByAccNum(Integer accountNumber);
-
-    AccountDto getAccountTypeByAccNum(Integer accountNumber);
+//    AccountDto getAccountNumByMemID(Integer memberID);
+//
+//    AccountDto getAccountByAccNum(Integer accountNumber);
+//
+//    AccountDto getAccountTypeByAccNum(Integer accountNumber);
 
     AccountDto getBalanceByAccNum(Integer accountNumber);
 

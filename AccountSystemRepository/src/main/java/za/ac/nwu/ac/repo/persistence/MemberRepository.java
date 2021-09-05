@@ -13,7 +13,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Member getMemberByID(Integer memberID);
 
     // get member by email
-    @Query(value = "SELECT m FROM Member m WHERE m.memEmail = :memEmail")
-    Member getMemberByEmail(String memEmail);
+//    @Query(value = "SELECT m FROM Member m WHERE m.memEmail = :memEmail")
+//    Member getMemberByEmail(String memEmail);
 
 }

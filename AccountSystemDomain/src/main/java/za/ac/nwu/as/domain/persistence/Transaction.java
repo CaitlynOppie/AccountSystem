@@ -1,5 +1,7 @@
 package za.ac.nwu.as.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,11 +18,8 @@ public class Transaction implements Serializable {
     private Integer transactionID;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MEMBER_ID")
-    private Member memberID;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACCOUNT_NUMBER")
+//    @JsonBackReference
     private Account accountNumber;
 
     @Column(name = "AMOUNT")
@@ -32,19 +31,14 @@ public class Transaction implements Serializable {
     public Transaction() {
     }
 
-    public Transaction(Member memberID, Account accountNumber, Double amount, LocalDate transactionDate) {
-        this.memberID = memberID;
+    public Transaction(Integer transactionID, Account accountNumber, Double amount, LocalDate transactionDate) {
+        this.transactionID = transactionID;
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
-    public Transaction(Integer transactionID, Member memberID, Account accountNumber, Double amount, LocalDate transactionDate) {
-        this.transactionID = transactionID;
-        this.memberID = memberID;
-        this.accountNumber = accountNumber;
-        this.amount = amount;
-        this.transactionDate = transactionDate;
+    public Transaction(Account accountNumber, double amount, LocalDate transactionDate) {
     }
 
     public Integer getTransactionID() {
@@ -53,14 +47,6 @@ public class Transaction implements Serializable {
 
     public void setTransactionID(Integer transactionID) {
         this.transactionID = transactionID;
-    }
-
-    public Member getMemberID() {
-        return memberID;
-    }
-
-    public void setMemberID(Member memberID) {
-        this.memberID = memberID;
     }
 
     public Account getAccountNumber() {
@@ -92,19 +78,18 @@ public class Transaction implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Objects.equals(transactionID, that.transactionID) && Objects.equals(memberID, that.memberID) && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
+        return Objects.equals(transactionID, that.transactionID) && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionID, memberID, accountNumber, amount, transactionDate);
+        return Objects.hash(transactionID, accountNumber, amount, transactionDate);
     }
 
     @Override
     public String toString() {
         return "AccountTransaction{" +
                 "transactionID=" + transactionID +
-                ", memberID=" + memberID +
                 ", accountNumber=" + accountNumber +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +

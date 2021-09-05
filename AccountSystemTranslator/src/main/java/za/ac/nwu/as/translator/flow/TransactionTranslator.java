@@ -17,6 +17,4 @@ public interface TransactionTranslator {
     TransactionDto getTransactionByAccountNumber(Integer accountNumber);
 
     TransactionDto getTransactionByDate(LocalDate transactionDate);
-
-    TransactionDto getTransactionByMemID(Integer memberID);
 }

@@ -12,18 +12,18 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     // get account by member ID
     @Query(value = "SELECT a FROM Account a WHERE a.memberID = :memberID")
     Account getAccountByMemID(Integer memberID);
-
-    // get account number by member ID
-    @Query(value = "SELECT a.accountNumber FROM Account a WHERE a.memberID = :memberID")
-    Account getAccountNumByMemID(Integer memberID);
-
-    // get account by account number
-    @Query(value = "SELECT a FROM Account a WHERE a.accountNumber = :accountNumber")
-    Account getAccountByAccNum(Integer accountNumber);
-
-    // get account type by account number
-    @Query(value = "SELECT a.type FROM Account a WHERE a.accountNumber = :accountNumber")
-    Account getAccountTypeByAccNum(Integer accountNumber);
+//
+//    // get account number by member ID
+//    @Query(value = "SELECT a.accountNumber FROM Account a WHERE a.memberID = :memberID")
+//    Account getAccountNumByMemID(Integer memberID);
+//
+//    // get account by account number
+//    @Query(value = "SELECT a FROM Account a WHERE a.accountNumber = :accountNumber")
+//    Account getAccountByAccNum(Integer accountNumber);
+//
+//    // get account type by account number
+//    @Query(value = "SELECT a.type FROM Account a WHERE a.accountNumber = :accountNumber")
+//    Account getAccountTypeByAccNum(Integer accountNumber);
 
     //view balance of account
     @Query(value = "SELECT a.balance FROM Account a WHERE a.accountNumber = :accountNumber")

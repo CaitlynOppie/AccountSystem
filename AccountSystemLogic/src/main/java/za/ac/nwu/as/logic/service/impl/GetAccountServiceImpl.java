@@ -1,9 +1,9 @@
-package za.ac.nwu.as.logic.flow.impl;
+package za.ac.nwu.as.logic.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.AccountDto;
-import za.ac.nwu.as.logic.flow.GetAccountService;
+import za.ac.nwu.as.logic.service.GetAccountService;
 import za.ac.nwu.as.translator.flow.AccountTranslator;
 
 import java.util.List;
@@ -29,20 +29,20 @@ public class GetAccountServiceImpl implements GetAccountService {
         return accountTranslator.getAccountByMemID(memberID);
     }
 
-    @Override
-    public AccountDto getAccountNumByMemID(Integer memberID) {
-        return accountTranslator.getAccountNumByMemID(memberID);
-    }
-
-    @Override
-    public AccountDto getAccountByAccNum(Integer accountNumber) {
-        return accountTranslator.getAccountByAccNum(accountNumber);
-    }
-
-    @Override
-    public AccountDto getAccountTypeByAccNum(Integer accountNumber) {
-        return accountTranslator.getAccountTypeByAccNum(accountNumber);
-    }
+//    @Override
+//    public AccountDto getAccountNumByMemID(Integer memberID) {
+//        return accountTranslator.getAccountNumByMemID(memberID);
+//    }
+//
+//    @Override
+//    public AccountDto getAccountByAccNum(Integer accountNumber) {
+//        return accountTranslator.getAccountByAccNum(accountNumber);
+//    }
+//
+//    @Override
+//    public AccountDto getAccountTypeByAccNum(Integer accountNumber) {
+//        return accountTranslator.getAccountTypeByAccNum(accountNumber);
+//    }
 
     @Override
     public AccountDto getBalanceByAccNum(Integer accountNumber) {

@@ -11,10 +11,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@ApiModel(value = "AccountTransaction", description = "A DTO that represents the AccountTransaction")
+@ApiModel(value = "Transaction", description = "A DTO that represents the Transaction")
 public class TransactionDto implements Serializable {
 
-    private Member memberID;
     private Account accountNumber;
     private double amount;
     private LocalDate transactionDate;
@@ -22,42 +21,24 @@ public class TransactionDto implements Serializable {
     public TransactionDto() {
     }
 
-    public TransactionDto(Member memberID, Account accountNumber, double amount, LocalDate transactionDate) {
-        this.memberID = memberID;
+    public TransactionDto(Account accountNumber, double amount, LocalDate transactionDate) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
     public TransactionDto(Transaction transaction){
-        this.setMemberID(transaction.getMemberID());
         this.setAccountNumber(transaction.getAccountNumber());
         this.setAmount(transaction.getAmount());
         this.setTransactionDate(transaction.getTransactionDate());
     }
 
     @ApiModelProperty(position = 1,
-            value = "AccountTransaction Member_ID",
-            name = "Member_ID",
-            notes = "Uniquely identifies the member of the account",
-            dataType = "Member",
-            example = "0006090281087",
-            required = true)
-
-    public Member getMemberID() {
-        return memberID;
-    }
-
-    public void setMemberID(Member memberID) {
-        this.memberID = memberID;
-    }
-
-    @ApiModelProperty(position = 2,
-            value = "AccountTransaction Account_Number",
+            value = "Transaction Account_Number",
             name = "Account_Number",
             notes = "Uniquely identifies the account",
             dataType = "Account",
-            example = "12345678",
+            example = "1",
             required = true)
 
     public Account getAccountNumber() {
@@ -68,8 +49,8 @@ public class TransactionDto implements Serializable {
         this.accountNumber = accountNumber;
     }
 
-    @ApiModelProperty(position = 3,
-            value = "AccountTransaction Amount",
+    @ApiModelProperty(position = 2,
+            value = "Transaction Amount",
             name = "Amount",
             notes = "Provides the amount of the transaction",
             dataType = "java.lang.Integer",
@@ -84,8 +65,8 @@ public class TransactionDto implements Serializable {
         this.amount = amount;
     }
 
-    @ApiModelProperty(position = 4,
-            value = "AccountTransaction Transaction_Date",
+    @ApiModelProperty(position = 3,
+            value = "Transaction Transaction_Date",
             name = "Traansaction_Date",
             notes = "Provide the date on which the transaction took place",
             dataType = "java.time.LocalDate",
@@ -102,25 +83,24 @@ public class TransactionDto implements Serializable {
 
 
     @JsonIgnore
-    public Transaction getTransaction(){return new Transaction(getMemberID(), getAccountNumber(), getAmount(), getTransactionDate() );}
+    public Transaction getTransaction(){return new Transaction(getAccountNumber(), getAmount(), getTransactionDate() );}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TransactionDto that = (TransactionDto) o;
-        return Double.compare(that.amount, amount) == 0 && Objects.equals(memberID, that.memberID) && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(transactionDate, that.transactionDate);
+        return Double.compare(that.amount, amount) == 0 && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( memberID, accountNumber, amount, transactionDate);
+        return Objects.hash( accountNumber, amount, transactionDate);
     }
 
     @Override
     public String toString() {
-        return "AccountTransactionDto{" +
-                "memberID=" + memberID +
+        return "TransactionDto{" +
                 ", accountNumber=" + accountNumber +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +

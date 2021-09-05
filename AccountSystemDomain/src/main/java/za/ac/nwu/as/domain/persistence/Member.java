@@ -1,5 +1,7 @@
 package za.ac.nwu.as.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -27,10 +29,8 @@ public class Member implements Serializable {
     @Column(name = "MEMBER_PHONE")
     private String memPhone;
 
-    @OneToMany(targetEntity = Transaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<Transaction> transactions;
-
     @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "accountNumber", orphanRemoval = true, cascade = CascadeType.PERSIST)
+//    @JsonManagedReference
     private Set<Account> account;
 
 
@@ -96,14 +96,6 @@ public class Member implements Serializable {
         this.memPhone = memPhone;
     }
 
-    public Set<Transaction> getAccountTransactions(){
-        return transactions;
-    }
-
-    public void setAccountTransactions(Set<Transaction> transactions){
-        this.transactions = transactions;
-    }
-
     public Set<Account> getAccount(){
         return account;
     }
@@ -117,12 +109,12 @@ public class Member implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return Objects.equals(memberID, member.memberID) && Objects.equals(memFirstName, member.memFirstName) && Objects.equals(memLastName, member.memLastName) && Objects.equals(memEmail, member.memEmail) && Objects.equals(memPhone, member.memPhone) && Objects.equals(transactions, member.transactions) && Objects.equals(account, member.account);
+        return Objects.equals(memberID, member.memberID) && Objects.equals(memFirstName, member.memFirstName) && Objects.equals(memLastName, member.memLastName) && Objects.equals(memEmail, member.memEmail) && Objects.equals(memPhone, member.memPhone) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberID, memFirstName, memLastName, memEmail, memPhone, transactions, account);
+        return Objects.hash(memberID, memFirstName, memLastName, memEmail, memPhone);
     }
 
     @Override

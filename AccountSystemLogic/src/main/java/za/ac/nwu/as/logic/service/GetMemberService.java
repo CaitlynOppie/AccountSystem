@@ -1,4 +1,4 @@
-package za.ac.nwu.as.logic.flow;
+package za.ac.nwu.as.logic.service;
 
 import za.ac.nwu.as.domain.dto.MemberDto;
 
@@ -10,6 +10,6 @@ public interface GetMemberService {
 
     MemberDto getMemberByID(Integer memberID);
 
-    MemberDto getMemberByEmail(String memEmail);
+//    MemberDto getMemberByEmail(String memEmail);
 
 }

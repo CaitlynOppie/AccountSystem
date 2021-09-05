@@ -14,6 +14,6 @@ public interface MemberTranslator {
 
     MemberDto getMemberByID(Integer memberID);
 
-    MemberDto getMemberByEmail(String memEmail);
+//    MemberDto getMemberByEmail(String memEmail);
 
 }

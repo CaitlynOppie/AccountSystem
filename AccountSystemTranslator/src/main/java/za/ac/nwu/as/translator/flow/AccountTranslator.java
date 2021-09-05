@@ -14,11 +14,11 @@ public interface AccountTranslator {
 
     AccountDto getAccountByMemID(Integer memberID);
 
-    AccountDto getAccountNumByMemID(Integer memberID);
-
-    AccountDto getAccountByAccNum(Integer accountNumber);
-
-    AccountDto getAccountTypeByAccNum(Integer accountNumber);
+//    AccountDto getAccountNumByMemID(Integer memberID);
+//
+//    AccountDto getAccountByAccNum(Integer accountNumber);
+//
+//    AccountDto getAccountTypeByAccNum(Integer accountNumber);
 
     AccountDto getBalanceByAccNum(Integer accountNumber);
 }

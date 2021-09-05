@@ -1,8 +1,8 @@
-package za.ac.nwu.as.logic.flow.impl;
+package za.ac.nwu.as.logic.service.impl;
 
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.TransactionDto;
-import za.ac.nwu.as.logic.flow.CreateTransactionService;
+import za.ac.nwu.as.logic.service.CreateTransactionService;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
 import javax.transaction.Transactional;

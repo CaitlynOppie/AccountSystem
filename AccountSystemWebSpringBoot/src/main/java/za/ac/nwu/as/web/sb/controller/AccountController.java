@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.as.domain.dto.AccountDto;
 import za.ac.nwu.as.domain.service.GeneralResponse;
-import za.ac.nwu.as.logic.flow.CreateAccountService;
-import za.ac.nwu.as.logic.flow.GetAccountService;
+import za.ac.nwu.as.logic.service.CreateAccountService;
+import za.ac.nwu.as.logic.service.GetAccountService;
 
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class AccountController {
     })
     public ResponseEntity<GeneralResponse<AccountDto>> getAccountByMemID(
             @ApiParam(value = "The member ID that identifies the Account.",
-            example = "9",
+            example = "1",
             name = "memberID",
             required = true)
             @PathVariable("memberID") Integer memberID){
@@ -76,62 +76,43 @@ public class AccountController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/getAccountTypeByMemID/{memberID}")
-    @ApiOperation(value = "Fetches the specified Account Number using the memberID.", notes = "Fetches the Account number corresponding to the given member ID")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Account returned", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-    })
-    public ResponseEntity<GeneralResponse<AccountDto>> getAccountNumByMemID(
-            @ApiParam(value = "The member ID that identifies the Account.",
-                    example = "9",
-                    name = "memberID",
-                    required = true)
-            @PathVariable("memberID") Integer memberID){
-        AccountDto account = getAccountService.getAccountNumByMemID(memberID);
-        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @GetMapping("/getAccountByAccNum/{accountNumber}")
+//    @ApiOperation(value = "Fetches the specified Account using the Account Number.", notes = "Fetches the Account corresponding to the given account number")
+//    @ApiResponses(value ={
+//            @ApiResponse(code = 200, message = "Account Number returned", response = GeneralResponse.class),
+//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+//            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+//    })
+//    public ResponseEntity<GeneralResponse<AccountDto>> getAccountByAccNum(
+//            @ApiParam(value = "The accountNumber that identifies the Account.",
+//                    example = "123456789",
+//                    name = "accountNumber",
+//                    required = true)
+//            @PathVariable("accountNumber") Integer accountNumber){
+//        AccountDto account = getAccountService.getAccountByAccNum(accountNumber);
+//        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
-    @GetMapping("/getAccountByAccNum/{accountNumber}")
-    @ApiOperation(value = "Fetches the specified Account using the Account Number.", notes = "Fetches the Account corresponding to the given account number")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Account Number returned", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-    })
-    public ResponseEntity<GeneralResponse<AccountDto>> getAccountByAccNum(
-            @ApiParam(value = "The accountNumber that identifies the Account.",
-                    example = "123456789",
-                    name = "accountNumber",
-                    required = true)
-            @PathVariable("accountNumber") Integer accountNumber){
-        AccountDto account = getAccountService.getAccountByAccNum(accountNumber);
-        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/getAccountTypeByAccNum/{accountNumber}")
-    @ApiOperation(value = "Fetches the specified Account Type using the Account Number.", notes = "Fetches the Account Type corresponding to the given account number")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Account Type returned", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-    })
-    public ResponseEntity<GeneralResponse<AccountDto>> getAccountTypeByAccNum(
-            @ApiParam(value = "The accountNumber that identifies the Account.",
-                    example = "123456789",
-                    name = "accountNumber",
-                    required = true)
-            @PathVariable("accountNumber") Integer accountNumber){
-        AccountDto account = getAccountService.getAccountTypeByAccNum(accountNumber);
-        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @GetMapping("/getAccountTypeByAccNum/{accountNumber}")
+//    @ApiOperation(value = "Fetches the specified Account Type using the Account Number.", notes = "Fetches the Account Type corresponding to the given account number")
+//    @ApiResponses(value ={
+//            @ApiResponse(code = 200, message = "Account Type returned", response = GeneralResponse.class),
+//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+//            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+//    })
+//    public ResponseEntity<GeneralResponse<AccountDto>> getAccountTypeByAccNum(
+//            @ApiParam(value = "The accountNumber that identifies the Account.",
+//                    example = "123456789",
+//                    name = "accountNumber",
+//                    required = true)
+//            @PathVariable("accountNumber") Integer accountNumber){
+//        AccountDto account = getAccountService.getAccountTypeByAccNum(accountNumber);
+//        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
     @GetMapping("/getBalanceByAccNum/{accountNumber}")
     @ApiOperation(value = "Fetches the balance of the account using the Account Number.", notes = "Fetches the balance of the account corresponding to the given account number")
@@ -143,7 +124,7 @@ public class AccountController {
     })
     public ResponseEntity<GeneralResponse<AccountDto>> getBalanceByAccNum(
             @ApiParam(value = "The accountNumber that identifies the Account.",
-                    example = "123456789",
+                    example = "1",
                     name = "accountNumber",
                     required = true)
             @PathVariable("accountNumber") Integer accountNumber){

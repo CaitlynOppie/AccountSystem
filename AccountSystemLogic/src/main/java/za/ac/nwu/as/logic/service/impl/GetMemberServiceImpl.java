@@ -1,9 +1,9 @@
-package za.ac.nwu.as.logic.flow.impl;
+package za.ac.nwu.as.logic.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.MemberDto;
-import za.ac.nwu.as.logic.flow.GetMemberService;
+import za.ac.nwu.as.logic.service.GetMemberService;
 import za.ac.nwu.as.translator.flow.MemberTranslator;
 
 import java.util.List;
@@ -28,9 +28,9 @@ public class GetMemberServiceImpl implements GetMemberService {
         return memberTranslator.getMemberByID(memberID);
     }
 
-    @Override
-    public MemberDto getMemberByEmail(String memEmail) {
-        return memberTranslator.getMemberByEmail(memEmail);
-    }
+//    @Override
+//    public MemberDto getMemberByEmail(String memEmail) {
+//        return memberTranslator.getMemberByEmail(memEmail);
+//    }
 
 }

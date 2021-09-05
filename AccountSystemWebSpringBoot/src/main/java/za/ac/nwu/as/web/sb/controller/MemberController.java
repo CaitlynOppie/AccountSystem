@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.as.domain.dto.MemberDto;
 import za.ac.nwu.as.domain.service.GeneralResponse;
-import za.ac.nwu.as.logic.flow.CreateMemberService;
-import za.ac.nwu.as.logic.flow.GetMemberService;
+import za.ac.nwu.as.logic.service.CreateMemberService;
+import za.ac.nwu.as.logic.service.GetMemberService;
 
 import java.util.List;
 
@@ -76,23 +76,23 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/getMemberByEmail/{memEmail}")
-    @ApiOperation(value = "Fetches the specified Member using the email.", notes = "Fetches the Member corresponding to the given email")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Member returned", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-    })
-    public ResponseEntity<GeneralResponse<MemberDto>> getAccountByMemEmail(
-            @ApiParam(value = "The member email that identifies the Member.",
-                    example = "caitlyn.opperman@gmail.com",
-                    name = "memEmail",
-                    required = true)
-            @PathVariable("memEmail") String memEmail){
-        MemberDto member = getMemberService.getMemberByEmail(memEmail);
-        GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @GetMapping("/getMemberByEmail/{memEmail}")
+//    @ApiOperation(value = "Fetches the specified Member using the email.", notes = "Fetches the Member corresponding to the given email")
+//    @ApiResponses(value ={
+//            @ApiResponse(code = 200, message = "Member returned", response = GeneralResponse.class),
+//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+//            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+//    })
+//    public ResponseEntity<GeneralResponse<MemberDto>> getAccountByMemEmail(
+//            @ApiParam(value = "The member email that identifies the Member.",
+//                    example = "caitlyn.opperman@gmail.com",
+//                    name = "memEmail",
+//                    required = true)
+//            @PathVariable("memEmail") String memEmail){
+//        MemberDto member = getMemberService.getMemberByEmail(memEmail);
+//        GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
 }

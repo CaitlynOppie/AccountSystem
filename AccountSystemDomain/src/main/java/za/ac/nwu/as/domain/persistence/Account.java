@@ -1,5 +1,8 @@
 package za.ac.nwu.as.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,6 +20,7 @@ public class Account implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
+//    @JsonBackReference
     private Member memberID;
 
     @Column(name = "TYPE")
@@ -26,6 +30,7 @@ public class Account implements Serializable {
     private double balance;
 
     @OneToMany(targetEntity = Transaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+//    @JsonManagedReference
     private Set<Transaction> transactions;
 
     public Account() {
@@ -88,11 +93,11 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
-    public Set<Transaction> getAccountTransactions(){
+    public Set<Transaction> getTransactions(){
         return transactions;
     }
 
-    public void setAccountTransactions(Set<Transaction> transactions){
+    public void setTransactions(Set<Transaction> transactions){
         this.transactions = transactions;
     }
 
@@ -101,12 +106,12 @@ public class Account implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(memberID, account.memberID) && Objects.equals(type, account.type) && Objects.equals(balance, account.balance) && Objects.equals(transactions, account.transactions);
+        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(memberID, account.memberID) && Objects.equals(type, account.type) && Objects.equals(balance, account.balance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, memberID, type, balance, transactions);
+        return Objects.hash(accountNumber, memberID, type, balance);
     }
 
     @Override
@@ -116,7 +121,6 @@ public class Account implements Serializable {
                 ", memberID=" + memberID +
                 ", type='" + type + '\'' +
                 ", balance=" + balance +
-                ", accountTransactions=" + transactions +
                 '}';
     }
 }

@@ -1,9 +1,9 @@
-package za.ac.nwu.as.logic.flow.impl;
+package za.ac.nwu.as.logic.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.as.domain.dto.TransactionDto;
-import za.ac.nwu.as.logic.flow.GetTransactionService;
+import za.ac.nwu.as.logic.service.GetTransactionService;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
 import java.time.LocalDate;
@@ -34,8 +34,4 @@ public class GetTransactionServiceImpl implements GetTransactionService {
         return transactionTranslator.getTransactionByDate(transactionDate);
     }
 
-    @Override
-    public TransactionDto getTransactionByMemID(Integer memberID) {
-        return transactionTranslator.getTransactionByMemID(memberID);
-    }
 }
