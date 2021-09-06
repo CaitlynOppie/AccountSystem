@@ -18,7 +18,6 @@ public class GetAccountServiceImpl implements GetAccountService {
         this.accountTranslator = accountTranslator;
     }
 
-
     @Override
     public List<AccountDto> getAllAccounts() {
         return accountTranslator.getAllAccounts();
@@ -29,24 +28,9 @@ public class GetAccountServiceImpl implements GetAccountService {
         return accountTranslator.getAccountByMemID(memberID);
     }
 
-//    @Override
-//    public AccountDto getAccountNumByMemID(Integer memberID) {
-//        return accountTranslator.getAccountNumByMemID(memberID);
-//    }
-//
-//    @Override
-//    public AccountDto getAccountByAccNum(Integer accountNumber) {
-//        return accountTranslator.getAccountByAccNum(accountNumber);
-//    }
-//
-//    @Override
-//    public AccountDto getAccountTypeByAccNum(Integer accountNumber) {
-//        return accountTranslator.getAccountTypeByAccNum(accountNumber);
-//    }
-
     @Override
-    public AccountDto getBalanceByAccNum(Integer accountNumber) {
-        return accountTranslator.getBalanceByAccNum(accountNumber);
+    public AccountDto getBalanceByAccNum(Integer accountNumber, String type) {
+        return accountTranslator.getBalanceByAccNum(accountNumber, type);
     }
 
 }

@@ -127,8 +127,8 @@ public class AccountController {
                     example = "1",
                     name = "accountNumber",
                     required = true)
-            @PathVariable("accountNumber") Integer accountNumber){
-        AccountDto account = getAccountService.getBalanceByAccNum(accountNumber);
+            @PathVariable("accountNumber") Integer accountNumber, String type){
+        AccountDto account = getAccountService.getBalanceByAccNum(accountNumber, type);
         GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

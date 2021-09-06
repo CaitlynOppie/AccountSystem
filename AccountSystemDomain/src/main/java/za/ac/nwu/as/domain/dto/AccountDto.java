@@ -25,6 +25,12 @@ public class AccountDto implements Serializable {
         this.balance = balance;
     }
 
+    public AccountDto(Double balance, String type)
+    {
+        this.balance = balance;
+        this.type = type;
+    }
+
     public AccountDto(Account account)
     {
         this.setMemberID(account.getMemberID());

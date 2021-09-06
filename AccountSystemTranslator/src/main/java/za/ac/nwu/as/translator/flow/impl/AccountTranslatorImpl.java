@@ -85,10 +85,10 @@ public class AccountTranslatorImpl implements AccountTranslator {
 //    }
 
     @Override
-    public AccountDto getBalanceByAccNum(Integer accountNumber) {
+    public AccountDto getBalanceByAccNum(Integer accountNumber, String type) {
         try{
-            Account account = accountRepository.getBalanceByAccNum(accountNumber);
-            return new AccountDto(account);
+            Double balance = accountRepository.getBalanceByAccNum(accountNumber,type);
+            return new AccountDto(balance,type);
         }catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);
         }

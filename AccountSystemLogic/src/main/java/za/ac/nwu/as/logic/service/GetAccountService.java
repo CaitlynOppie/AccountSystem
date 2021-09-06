@@ -9,12 +9,6 @@ public interface GetAccountService {
 
     AccountDto getAccountByMemID(Integer memberID);
 
-//    AccountDto getAccountNumByMemID(Integer memberID);
-//
-//    AccountDto getAccountByAccNum(Integer accountNumber);
-//
-//    AccountDto getAccountTypeByAccNum(Integer accountNumber);
-
-    AccountDto getBalanceByAccNum(Integer accountNumber);
+    AccountDto getBalanceByAccNum(Integer accountNumber, String type);
 
 }

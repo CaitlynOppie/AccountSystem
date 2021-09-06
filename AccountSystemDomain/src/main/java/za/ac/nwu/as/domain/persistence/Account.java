@@ -20,7 +20,7 @@ public class Account implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
-//    @JsonBackReference
+    @JsonBackReference
     private Member memberID;
 
     @Column(name = "TYPE")
@@ -30,7 +30,7 @@ public class Account implements Serializable {
     private double balance;
 
     @OneToMany(targetEntity = Transaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
-//    @JsonManagedReference
+    @JsonManagedReference
     private Set<Transaction> transactions;
 
     public Account() {

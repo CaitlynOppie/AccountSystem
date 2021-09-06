@@ -19,7 +19,7 @@ public class Transaction implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACCOUNT_NUMBER")
-//    @JsonBackReference
+    @JsonBackReference
     private Account accountNumber;
 
     @Column(name = "AMOUNT")
