@@ -9,6 +9,7 @@ import za.ac.nwu.as.translator.flow.AccountTranslator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AccountTranslatorImpl implements AccountTranslator {
@@ -22,15 +23,17 @@ public class AccountTranslatorImpl implements AccountTranslator {
 
     @Override
     public List<AccountDto> getAllAccounts(){
-        List<AccountDto> accountDtos = new ArrayList<>();
+
         try{
+            List<AccountDto> accountDtos = new ArrayList<>();
             for(Account account : accountRepository.findAll()){
                 accountDtos.add(new AccountDto(account));
             }
+            return accountDtos;
+
         }catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);
         }
-        return accountDtos;
     }
 
     @Override
@@ -45,52 +48,46 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public AccountDto getAccountByMemID(Integer memberID) {
+    public List<AccountDto> getAccountByMemID(Integer memberID) {
         try{
-            Account account = accountRepository.getAccountByMemID(memberID);
+            List<AccountDto> accountDtos = new ArrayList<>();
+            for(Account account : accountRepository.getAccountByMemID(memberID)){
+                accountDtos.add(new AccountDto(account));
+            }
+            return accountDtos;
+        }catch (Exception e){
+            throw new RuntimeException("Unable to read from the DB", e);
+        }
+
+    }
+
+    @Override
+    public AccountDto getByAccountNumber(Integer accountNumber) {
+        try{
+            Optional<Account> account = accountRepository.getByAccountNumber(accountNumber);
             return new AccountDto(account);
         }catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);
         }
     }
 
-//    @Override
-//    public AccountDto getAccountNumByMemID(Integer memberID) {
-//        try{
-//            Account account = accountRepository.getAccountNumByMemID(memberID);
-//            return new AccountDto(account);
-//        }catch (Exception e){
-//            throw new RuntimeException("Unable to read from the DB", e);
-//        }
-//    }
-
-//    @Override
-//    public AccountDto getAccountByAccNum(Integer accountNumber) {
-//        try{
-//            Account account = accountRepository.getAccountByAccNum(accountNumber);
-//            return new AccountDto(account);
-//        }catch (Exception e){
-//            throw new RuntimeException("Unable to read from the DB", e);
-//        }
-//    }
-//
-//    @Override
-//    public AccountDto getAccountTypeByAccNum(Integer accountNumber) {
-//        try{
-//            Account account = accountRepository.getAccountTypeByAccNum(accountNumber);
-//            return new AccountDto(account);
-//        }catch (Exception e){
-//            throw new RuntimeException("Unable to read from the DB", e);
-//        }
-//    }
-
     @Override
-    public AccountDto getBalanceByAccNum(Integer accountNumber, String type) {
+    public AccountDto getBalanceByAccNum(Integer accountNumber) {
         try{
-            Double balance = accountRepository.getBalanceByAccNum(accountNumber,type);
-            return new AccountDto(balance,type);
+            Account account = accountRepository.getBalanceByAccNum(accountNumber);
+            return new AccountDto(account);
         }catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);
         }
     }
+
+    @Override
+    public void updateBalanceByAccNum(Integer accountNumber, double amount) {
+        try{
+            accountRepository.updateBalanceByAccNum(accountNumber,amount);
+        }catch (Exception e){
+            throw new RuntimeException("Unable to update the DB", e);
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ import za.ac.nwu.as.domain.dto.AccountDto;
 import za.ac.nwu.as.domain.service.GeneralResponse;
 import za.ac.nwu.as.logic.service.CreateAccountService;
 import za.ac.nwu.as.logic.service.GetAccountService;
+import za.ac.nwu.as.logic.service.UpdateAccountService;
 
 import java.util.List;
 
@@ -21,11 +22,78 @@ public class AccountController {
 
     private final GetAccountService getAccountService;
     private final CreateAccountService createAccountService;
+    private final UpdateAccountService updateAccountService;
 
     @Autowired
-    public AccountController(GetAccountService getAccountService, CreateAccountService createAccountService) {
+    public AccountController(GetAccountService getAccountService, CreateAccountService createAccountService, UpdateAccountService updateAccountService) {
         this.getAccountService = getAccountService;
         this.createAccountService = createAccountService;
+        this.updateAccountService = updateAccountService;
+    }
+
+    @PostMapping("")
+    @ApiOperation(value = "Creates new Account.", notes = "Creates a new Account in the DB.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The Account was created successfully", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class)
+    })
+    public ResponseEntity<GeneralResponse<AccountDto>> create(
+            @ApiParam(value = "Request body to create a new Account.", required = true)
+            @RequestBody AccountDto account) {
+        AccountDto accountResponse = createAccountService.create(account);
+        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, accountResponse);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/add-to-account/{accountNumber}/{amount}")
+    @ApiOperation(value = "Updates the balance of the Account.", notes = "Updates the balance of the Account.")
+    @ApiResponses(value ={
+            @ApiResponse(code = 200, message = "Account balance updated", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+    })
+    public void increaseBalanceByAccNum(
+            @ApiParam(value = "The accountNumber that identifies the Account.",
+                    example = "1",
+                    name = "accountNumber",
+                    required = true)
+
+            @PathVariable("accountNumber") Integer accountNumber,
+
+            @ApiParam(value = "The amount to increase balance by.",
+            example = "150",
+            name = "amount",
+            required = true)
+
+        @PathVariable("amount") double amount){
+            updateAccountService.updateBalanceByAccNum(accountNumber,amount);
+    }
+
+    @PutMapping("/subtract-from-account/{accountNumber}/{amount}")
+    @ApiOperation(value = "Updates the balance of the Account.", notes = "Updates the balance of the Account.")
+    @ApiResponses(value ={
+            @ApiResponse(code = 200, message = "Account balance updated", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+    })
+    public void decreaseBalanceByAccNum(
+            @ApiParam(value = "The accountNumber that identifies the Account.",
+                    example = "1",
+                    name = "accountNumber",
+                    required = true)
+
+            @PathVariable("accountNumber") Integer accountNumber,
+
+            @ApiParam(value = "The amount to decrease balance by.",
+                    example = "-150",
+                    name = "amount",
+                    required = true)
+
+            @PathVariable("amount") double amount){
+        updateAccountService.updateBalanceByAccNum(accountNumber,amount);
     }
 
     @GetMapping("/all")
@@ -42,21 +110,6 @@ public class AccountController {
     return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("")
-    @ApiOperation(value = "Creates new Account.", notes = "Creates a new Account in the DB.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The Account was created successfully", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class)
-    })
-    public ResponseEntity<GeneralResponse<AccountDto>> create(
-            @ApiParam(value = "Request body to create a new Account.", required = true)
-            @RequestBody AccountDto account) {
-    AccountDto accountResponse = createAccountService.create(account);
-    GeneralResponse<AccountDto> response = new GeneralResponse<>(true, accountResponse);
-    return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
     @GetMapping("/getAccountByMemID/{memberID}")
     @ApiOperation(value = "Fetches the specified Account using the member ID.", notes = "Fetches the Account corresponding to the given member ID")
     @ApiResponses(value ={
@@ -65,54 +118,16 @@ public class AccountController {
             @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
-    public ResponseEntity<GeneralResponse<AccountDto>> getAccountByMemID(
+    public ResponseEntity<GeneralResponse<List<AccountDto>>> getAccountByMemID(
             @ApiParam(value = "The member ID that identifies the Account.",
             example = "1",
             name = "memberID",
             required = true)
             @PathVariable("memberID") Integer memberID){
-        AccountDto account = getAccountService.getAccountByMemID(memberID);
-        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
+        List<AccountDto> account = getAccountService.getAccountByMemID(memberID);
+        GeneralResponse<List<AccountDto>> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-//    @GetMapping("/getAccountByAccNum/{accountNumber}")
-//    @ApiOperation(value = "Fetches the specified Account using the Account Number.", notes = "Fetches the Account corresponding to the given account number")
-//    @ApiResponses(value ={
-//            @ApiResponse(code = 200, message = "Account Number returned", response = GeneralResponse.class),
-//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-//            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-//    })
-//    public ResponseEntity<GeneralResponse<AccountDto>> getAccountByAccNum(
-//            @ApiParam(value = "The accountNumber that identifies the Account.",
-//                    example = "123456789",
-//                    name = "accountNumber",
-//                    required = true)
-//            @PathVariable("accountNumber") Integer accountNumber){
-//        AccountDto account = getAccountService.getAccountByAccNum(accountNumber);
-//        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
-
-//    @GetMapping("/getAccountTypeByAccNum/{accountNumber}")
-//    @ApiOperation(value = "Fetches the specified Account Type using the Account Number.", notes = "Fetches the Account Type corresponding to the given account number")
-//    @ApiResponses(value ={
-//            @ApiResponse(code = 200, message = "Account Type returned", response = GeneralResponse.class),
-//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-//            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-//    })
-//    public ResponseEntity<GeneralResponse<AccountDto>> getAccountTypeByAccNum(
-//            @ApiParam(value = "The accountNumber that identifies the Account.",
-//                    example = "123456789",
-//                    name = "accountNumber",
-//                    required = true)
-//            @PathVariable("accountNumber") Integer accountNumber){
-//        AccountDto account = getAccountService.getAccountTypeByAccNum(accountNumber);
-//        GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
 
     @GetMapping("/getBalanceByAccNum/{accountNumber}")
     @ApiOperation(value = "Fetches the balance of the account using the Account Number.", notes = "Fetches the balance of the account corresponding to the given account number")
@@ -127,8 +142,8 @@ public class AccountController {
                     example = "1",
                     name = "accountNumber",
                     required = true)
-            @PathVariable("accountNumber") Integer accountNumber, String type){
-        AccountDto account = getAccountService.getBalanceByAccNum(accountNumber, type);
+            @PathVariable("accountNumber") Integer accountNumber){
+        AccountDto account = getAccountService.getBalanceByAccNum(accountNumber);
         GeneralResponse<AccountDto> response = new GeneralResponse<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

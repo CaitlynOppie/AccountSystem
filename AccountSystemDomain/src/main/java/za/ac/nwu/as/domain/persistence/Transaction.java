@@ -39,6 +39,9 @@ public class Transaction implements Serializable {
     }
 
     public Transaction(Account accountNumber, double amount, LocalDate transactionDate) {
+        this.accountNumber = accountNumber;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
     }
 
     public Integer getTransactionID() {

@@ -95,7 +95,7 @@ public class TransactionDto implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash( accountNumber, amount, transactionDate);
+        return Objects.hash(accountNumber, amount, transactionDate);
     }
 
     @Override

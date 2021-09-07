@@ -24,13 +24,18 @@ public class GetAccountServiceImpl implements GetAccountService {
     }
 
     @Override
-    public AccountDto getAccountByMemID(Integer memberID) {
+    public List<AccountDto> getAccountByMemID(Integer memberID) {
         return accountTranslator.getAccountByMemID(memberID);
     }
 
     @Override
-    public AccountDto getBalanceByAccNum(Integer accountNumber, String type) {
-        return accountTranslator.getBalanceByAccNum(accountNumber, type);
+    public AccountDto getBalanceByAccNum(Integer accountNumber) {
+        return accountTranslator.getBalanceByAccNum(accountNumber);
+    }
+
+    @Override
+    public AccountDto getByAccountNumber(Integer accountNumber) {
+        return accountTranslator.getByAccountNumber(accountNumber);
     }
 
 }

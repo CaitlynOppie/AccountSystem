@@ -10,9 +10,13 @@ public interface AccountTranslator {
 
     List<AccountDto> getAllAccounts();
 
+    AccountDto getByAccountNumber(Integer accountNumber);
+
     AccountDto create(AccountDto accountDto);
 
-    AccountDto getAccountByMemID(Integer memberID);
+    List<AccountDto> getAccountByMemID(Integer memberID);
 
-    AccountDto getBalanceByAccNum(Integer accountNumber, String type);
+    AccountDto getBalanceByAccNum(Integer accountNumber);
+
+    void updateBalanceByAccNum(Integer accountNumber, double amount);
 }

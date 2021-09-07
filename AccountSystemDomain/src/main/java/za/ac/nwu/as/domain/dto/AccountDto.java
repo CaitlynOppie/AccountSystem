@@ -7,7 +7,9 @@ import za.ac.nwu.as.domain.persistence.Account;
 import za.ac.nwu.as.domain.persistence.Member;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @ApiModel(value = "Account", description = "A DTO that represents the Account")
 public class AccountDto implements Serializable {
@@ -25,17 +27,14 @@ public class AccountDto implements Serializable {
         this.balance = balance;
     }
 
-    public AccountDto(Double balance, String type)
-    {
-        this.balance = balance;
-        this.type = type;
-    }
-
     public AccountDto(Account account)
     {
         this.setMemberID(account.getMemberID());
         this.setType(account.getType());
         this.setBalance(account.getBalance());
+    }
+
+    public AccountDto(Optional<Account> account) {
     }
 
     @ApiModelProperty(position = 1,
@@ -91,12 +90,7 @@ public class AccountDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountDto that = (AccountDto) o;
-        return Double.compare(that.balance, balance) == 0  && Objects.equals(memberID, that.memberID) && Objects.equals(type, that.type);
-    }
-
-    @JsonIgnore
-    public Account getAccount(){
-        return new Account(getMemberID(), getType(), getBalance());
+        return Double.compare(that.balance, balance) == 0 && Objects.equals(memberID, that.memberID) && Objects.equals(type, that.type);
     }
 
     @Override
@@ -104,12 +98,10 @@ public class AccountDto implements Serializable {
         return Objects.hash(memberID, type, balance);
     }
 
-    @Override
-    public String toString() {
-        return "AccountDto{" +
-                "memberID=" + memberID +
-                ", type='" + type + '\'' +
-                ", balance=" + balance +
-                '}';
+    @JsonIgnore
+    public Account getAccount(){
+        return new Account(getMemberID(), getType(), getBalance());
     }
+
+
 }

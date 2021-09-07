@@ -7,8 +7,10 @@ import java.util.List;
 public interface GetAccountService {
     List<AccountDto> getAllAccounts();
 
-    AccountDto getAccountByMemID(Integer memberID);
+    List<AccountDto> getAccountByMemID(Integer memberID);
 
-    AccountDto getBalanceByAccNum(Integer accountNumber, String type);
+    AccountDto getBalanceByAccNum(Integer accountNumber);
+
+    AccountDto getByAccountNumber(Integer accountNumber);
 
 }

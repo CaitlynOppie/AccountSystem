@@ -28,20 +28,6 @@ public class MemberController {
         this.createMemberService = createMemberService;
     }
 
-    @GetMapping("/all")
-    @ApiOperation(value = "Gets all the Members.", notes = "Returns a list of members")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Members returned", response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-
-    public ResponseEntity<GeneralResponse<List<MemberDto>>> getAll() {
-        List<MemberDto> member = getMemberService.getAllMembers();
-        GeneralResponse<List<MemberDto>> response = new GeneralResponse<>(true,member);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
     @PostMapping("")
     @ApiOperation(value = "Creates new Member.", notes = "Creates a new Member in the DB.")
     @ApiResponses(value = {
@@ -55,6 +41,20 @@ public class MemberController {
         MemberDto memberResponse = createMemberService.create(member);
         GeneralResponse<MemberDto> response = new GeneralResponse<>(true, memberResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all")
+    @ApiOperation(value = "Gets all the Members.", notes = "Returns a list of members")
+    @ApiResponses(value ={
+            @ApiResponse(code = 200, message = "Members returned", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
+
+    public ResponseEntity<GeneralResponse<List<MemberDto>>> getAll() {
+        List<MemberDto> member = getMemberService.getAllMembers();
+        GeneralResponse<List<MemberDto>> response = new GeneralResponse<>(true,member);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/getMemberByID/{memberID}")
@@ -75,24 +75,5 @@ public class MemberController {
         GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-//    @GetMapping("/getMemberByEmail/{memEmail}")
-//    @ApiOperation(value = "Fetches the specified Member using the email.", notes = "Fetches the Member corresponding to the given email")
-//    @ApiResponses(value ={
-//            @ApiResponse(code = 200, message = "Member returned", response = GeneralResponse.class),
-//            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-//            @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
-//            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
-//    })
-//    public ResponseEntity<GeneralResponse<MemberDto>> getAccountByMemEmail(
-//            @ApiParam(value = "The member email that identifies the Member.",
-//                    example = "caitlyn.opperman@gmail.com",
-//                    name = "memEmail",
-//                    required = true)
-//            @PathVariable("memEmail") String memEmail){
-//        MemberDto member = getMemberService.getMemberByEmail(memEmail);
-//        GeneralResponse<MemberDto> response = new GeneralResponse<>(true, member);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
 
 }
