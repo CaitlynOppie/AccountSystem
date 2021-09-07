@@ -14,8 +14,6 @@ public interface AccountTranslator {
 
     AccountDto create(AccountDto accountDto);
 
-    List<AccountDto> getAccountByMemID(Integer memberID);
-
     AccountDto getBalanceByAccNum(Integer accountNumber);
 
     void updateBalanceByAccNum(Integer accountNumber, double amount);

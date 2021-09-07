@@ -1,21 +1,7 @@
 package za.ac.nwu.as.web.sb.controller;
 
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.ac.nwu.as.domain.dto.TransactionDto;
-import za.ac.nwu.as.domain.service.GeneralResponse;
-import za.ac.nwu.as.logic.service.CreateTransactionService;
-import za.ac.nwu.as.logic.service.GetTransactionService;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/transaction")

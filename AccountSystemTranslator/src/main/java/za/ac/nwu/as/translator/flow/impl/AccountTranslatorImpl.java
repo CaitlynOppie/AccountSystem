@@ -48,20 +48,6 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public List<AccountDto> getAccountByMemID(Integer memberID) {
-        try{
-            List<AccountDto> accountDtos = new ArrayList<>();
-            for(Account account : accountRepository.getAccountByMemID(memberID)){
-                accountDtos.add(new AccountDto(account));
-            }
-            return accountDtos;
-        }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-
-    }
-
-    @Override
     public AccountDto getByAccountNumber(Integer accountNumber) {
         try{
             Optional<Account> account = accountRepository.getByAccountNumber(accountNumber);

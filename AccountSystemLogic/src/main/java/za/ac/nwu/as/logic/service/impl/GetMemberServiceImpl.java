@@ -28,9 +28,5 @@ public class GetMemberServiceImpl implements GetMemberService {
         return memberTranslator.getMemberByID(memberID);
     }
 
-//    @Override
-//    public MemberDto getMemberByEmail(String memEmail) {
-//        return memberTranslator.getMemberByEmail(memEmail);
-//    }
 
 }
