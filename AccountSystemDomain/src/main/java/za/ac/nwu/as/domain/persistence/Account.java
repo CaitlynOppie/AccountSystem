@@ -29,7 +29,7 @@ public class Account implements Serializable {
     @Column(name = "BALANCE")
     private double balance;
 
-    @OneToMany(targetEntity = Transaction.class, fetch = FetchType.LAZY, mappedBy = "transactionID", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = Transaction.class, fetch = FetchType.LAZY, mappedBy = "accountNumber")
     @JsonManagedReference
     private Set<Transaction> transactions;
 

@@ -29,7 +29,7 @@ public class Member implements Serializable {
     @Column(name = "MEMBER_PHONE")
     private String memPhone;
 
-    @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "accountNumber", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = Account.class, fetch = FetchType.LAZY, mappedBy = "memberID")
     @JsonManagedReference
     private Set<Account> account;
 

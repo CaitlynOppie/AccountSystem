@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import za.ac.nwu.as.logic.service.UpdateAccountService;
 import za.ac.nwu.as.translator.flow.AccountTranslator;
 
+import javax.transaction.Transactional;
+
+@Transactional
 @Component
 public class UpdateAccountServiceImpl implements UpdateAccountService {
 
