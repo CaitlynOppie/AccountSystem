@@ -1,6 +1,7 @@
 package za.ac.nwu.as.logic.service.impl;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +13,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import za.ac.nwu.as.domain.dto.MemberDto;
 import za.ac.nwu.as.translator.flow.MemberTranslator;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateMemberServiceImplTest {
@@ -36,10 +35,8 @@ public class CreateMemberServiceImplTest {
 
     @Test
     public void create() {
-
-//        when(memTranslator.create(any(MemberDto.class))).thenReturn(null);
-//        MemberDto result = memService.create(new MemberDto());
-//        assertNull(result);
-//        verify(memTranslator).create(any(MemberDto.class));
+        //testing that the create method is called exactly once when a new member is created.
+//        MemberDto test = memService.create(new MemberDto());
+//        verify(memTranslator, times(1)).create(any(MemberDto.class));
     }
 }

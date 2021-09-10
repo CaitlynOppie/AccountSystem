@@ -23,7 +23,11 @@ public class CreateMemberServiceImpl implements CreateMemberService {
     @Override
     public MemberDto create(MemberDto memberDto){
         if(null == memberDto.getMemFirstName()){
-            memberDto.setMemFirstName("Caitlyn");
+            memberDto.setMemberID(0);
+            memberDto.setMemFirstName("Name");
+            memberDto.setMemLastName("Surname");
+            memberDto.setMemEmail("email@gmail.com");
+            memberDto.setMemPhone("0000000000");
         }
         return memberTranslator.create(memberDto);
     }

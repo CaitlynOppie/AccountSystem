@@ -17,7 +17,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> getByAccountNumber(Integer accountNumber);
 
     //view balance of account
-    @Query(value = "SELECT a.memberID, a.type, a.balance FROM Account a WHERE a.accountNumber = :accountNumber")
+    @Query(value = "SELECT a FROM Account a WHERE a.accountNumber = :accountNumber")
     Account getBalanceByAccNum(Integer accountNumber);
 
     //update balance (add & subtract)
@@ -25,6 +25,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Modifying
     @Query(value = "UPDATE Account a SET a.balance = :amount + a.balance WHERE a.accountNumber = :accountNumber")
     void updateBalanceByAccNum(Integer accountNumber, double amount);
+
 
 
 }

@@ -18,6 +18,4 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query(value = "SELECT t FROM Transaction t WHERE t.transactionDate = :transactionDate")
     Transaction getTransactionByDate(LocalDate transactionDate);
 
-    // Insert new transaction
-    // --> use save from CrudRepository
 }

@@ -11,12 +11,21 @@ import java.util.Objects;
 @ApiModel(value = "Member", description = "A DTO that represents the Member")
 public class MemberDto {
 
+    private Integer memberID;
     public String memFirstName;
     public String memLastName;
     public String memEmail;
     public String memPhone;
 
     public MemberDto() {
+    }
+
+    public MemberDto(Integer memberID, String memFirstName, String memLastName, String memEmail, String memPhone) {
+        this.memberID = memberID;
+        this.memFirstName = memFirstName;
+        this.memLastName = memLastName;
+        this.memEmail = memEmail;
+        this.memPhone = memPhone;
     }
 
     public MemberDto(String memFirstName, String memLastName, String memEmail, String memPhone) {
@@ -27,10 +36,19 @@ public class MemberDto {
     }
 
     public MemberDto(Member member){
+        this.setMemberID(member.getMemberID());
         this.setMemFirstName(member.getMemFirstName());
         this.setMemLastName(member.getMemLastName());
         this.setMemEmail(member.getMemEmail());
         this.setMemPhone(member.getMemPhone());
+    }
+
+    public Integer getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(Integer memberID) {
+        this.memberID = memberID;
     }
 
     @ApiModelProperty(position = 1,
@@ -98,7 +116,14 @@ public class MemberDto {
     }
 
     @JsonIgnore
-    public Member getMember(){return new Member(getMemFirstName(), getMemLastName(), getMemEmail(), getMemPhone());}
+    public Member getMember(){
+        return new Member(getMemberID(), getMemFirstName(), getMemLastName(), getMemEmail(), getMemPhone());
+    }
+
+    @JsonIgnore
+    public Member getMemID(){
+        return new Member(getMemberID());
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -115,7 +140,8 @@ public class MemberDto {
     @Override
     public String toString() {
         return "MemberDto{" +
-                "memFirstName='" + memFirstName + '\'' +
+                "memberID=" + memberID +
+                ", memFirstName='" + memFirstName + '\'' +
                 ", memLastName='" + memLastName + '\'' +
                 ", memEmail='" + memEmail + '\'' +
                 ", memPhone='" + memPhone + '\'' +

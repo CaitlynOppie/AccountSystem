@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.as.domain.persistence.Account;
 import za.ac.nwu.as.domain.persistence.Transaction;
-import za.ac.nwu.as.domain.persistence.Member;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,38 +13,57 @@ import java.util.Objects;
 @ApiModel(value = "Transaction", description = "A DTO that represents the Transaction")
 public class TransactionDto implements Serializable {
 
-    private Account accountNumber;
+    private Integer transactionID;
+    private AccountDto accountNumber;
     private double amount;
     private LocalDate transactionDate;
 
     public TransactionDto() {
     }
 
-    public TransactionDto(Account accountNumber, double amount, LocalDate transactionDate) {
+    public TransactionDto(Integer transactionID, AccountDto accountNumber, double amount, LocalDate transactionDate) {
+        this.transactionID = transactionID;
+        this.accountNumber = accountNumber;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+    }
+
+    public TransactionDto(AccountDto accountNumber, double amount, LocalDate transactionDate) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
     public TransactionDto(Transaction transaction){
-        this.setAccountNumber(transaction.getAccountNumber());
+        this.setTransactionID(transaction.getTransactionID());
         this.setAmount(transaction.getAmount());
         this.setTransactionDate(transaction.getTransactionDate());
+        if (null != transaction.getAccountNumber()){
+            this.accountNumber = new AccountDto(transaction.getAccountNumber());
+        }
+    }
+
+    public Integer getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(Integer transactionID) {
+        this.transactionID = transactionID;
     }
 
     @ApiModelProperty(position = 1,
             value = "Transaction Account_Number",
             name = "Account_Number",
             notes = "Uniquely identifies the account",
-            dataType = "Account",
+            dataType = "AccountDto",
             example = "1",
             required = true)
 
-    public Account getAccountNumber() {
+    public AccountDto getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Account accountNumber) {
+    public void setAccountNumber(AccountDto accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -83,7 +101,10 @@ public class TransactionDto implements Serializable {
 
 
     @JsonIgnore
-    public Transaction getTransaction(){return new Transaction(getAccountNumber(), getAmount(), getTransactionDate() );}
+    public Transaction getTransaction(){
+        return new Transaction(
+               getTransactionID(), getAccountNumber().getAccountNr(), getAmount(), getTransactionDate() );
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -101,6 +122,7 @@ public class TransactionDto implements Serializable {
     @Override
     public String toString() {
         return "TransactionDto{" +
+                "transactionID=" + transactionID +
                 ", accountNumber=" + accountNumber +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +

@@ -14,14 +14,22 @@ import java.util.Optional;
 @ApiModel(value = "Account", description = "A DTO that represents the Account")
 public class AccountDto implements Serializable {
 
-    private Member memberID;
+    private Integer accountNumber;
+    private MemberDto memberID;
     private String type;
     private double balance;
 
     public AccountDto() {
     }
 
-    public AccountDto(Member memberID, String type, double balance) {
+    public AccountDto(Integer accountNumber, MemberDto memberID, String type, double balance) {
+        this.accountNumber = accountNumber;
+        this.memberID = memberID;
+        this.type = type;
+        this.balance = balance;
+    }
+
+    public AccountDto(MemberDto memberID, String type, double balance) {
         this.memberID = memberID;
         this.type = type;
         this.balance = balance;
@@ -29,27 +37,38 @@ public class AccountDto implements Serializable {
 
     public AccountDto(Account account)
     {
-        this.setMemberID(account.getMemberID());
+        this.setAccountNumber(account.getAccountNumber());
         this.setType(account.getType());
         this.setBalance(account.getBalance());
+        if (null != account.getMemberID()){
+            this.memberID = new MemberDto(account.getMemberID());
+        }
     }
 
     public AccountDto(Optional<Account> account) {
+    }
+
+    public Integer getAccountNumber(){
+        return accountNumber;
+    }
+
+    public void setAccountNumber(Integer accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     @ApiModelProperty(position = 1,
             value = "Account memberID",
             name = "memberID",
             notes = "Uniquely identifies the member of the account",
-            dataType = "java.lang.Integer",
+            dataType = "MemberDto",
             example = "1",
             required = true)
 
-    public Member getMemberID() {
+    public MemberDto getMemberID() {
         return memberID;
     }
 
-    public void setMemberID(Member memberID) {
+    public void setMemberID(MemberDto memberID) {
         this.memberID = memberID;
     }
 
@@ -100,8 +119,21 @@ public class AccountDto implements Serializable {
 
     @JsonIgnore
     public Account getAccount(){
-        return new Account(getMemberID(), getType(), getBalance());
+        return new Account(getAccountNumber(), getMemberID().getMemID(), getType(), getBalance());
     }
 
+    @JsonIgnore
+    public Account getAccountNr(){
+        return new Account(getAccountNumber());
+    }
 
+    @Override
+    public String toString() {
+        return "AccountDto{" +
+                "accountNumber=" + accountNumber +
+                ", memberID=" + memberID +
+                ", type='" + type + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }

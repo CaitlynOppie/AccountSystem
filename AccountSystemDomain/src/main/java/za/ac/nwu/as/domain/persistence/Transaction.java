@@ -1,6 +1,7 @@
 package za.ac.nwu.as.domain.persistence;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import za.ac.nwu.as.domain.dto.AccountDto;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -111,7 +111,8 @@ public class AccountController {
     }
 
     @GetMapping("/getBalanceByAccNum/{accountNumber}")
-    @ApiOperation(value = "Fetches the balance of the account using the Account Number.", notes = "Fetches the balance of the account corresponding to the given account number")
+    @ApiOperation(value = "Fetches the balance of the account using the Account Number.",
+            notes = "Fetches the balance of the account corresponding to the given account number")
     @ApiResponses(value ={
             @ApiResponse(code = 200, message = "Account Type returned", response = Response.class),
             @ApiResponse(code = 400, message = "Bad Request", response = Response.class),
