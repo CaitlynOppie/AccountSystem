@@ -46,55 +46,55 @@ public class AccountController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/add-to-account/{accountNumber}/{amount}")
-    @ApiOperation(value = "Updates the balance of the Account.", notes = "Updates the balance of the Account.")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Account balance updated", response = Response.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = Response.class),
-            @ApiResponse(code = 404, message = "Not Found", response = Response.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)
-    })
-    public void increaseBalanceByAccNum(
-            @ApiParam(value = "The accountNumber that identifies the Account.",
-                    example = "1",
-                    name = "accountNumber",
-                    required = true)
-
-            @PathVariable("accountNumber") Integer accountNumber,
-
-            @ApiParam(value = "The amount to increase balance by.",
-            example = "150",
-            name = "amount",
-            required = true)
-
-        @PathVariable("amount") double amount){
-            updateAccountService.updateBalanceByAccNum(accountNumber,amount);
-    }
-
-    @PutMapping("/subtract-from-account/{accountNumber}/{amount}")
-    @ApiOperation(value = "Updates the balance of the Account.", notes = "Updates the balance of the Account.")
-    @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "Account balance updated", response = Response.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = Response.class),
-            @ApiResponse(code = 404, message = "Not Found", response = Response.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)
-    })
-    public void decreaseBalanceByAccNum(
-            @ApiParam(value = "The accountNumber that identifies the Account.",
-                    example = "1",
-                    name = "accountNumber",
-                    required = true)
-
-            @PathVariable("accountNumber") Integer accountNumber,
-
-            @ApiParam(value = "The amount to decrease balance by.",
-                    example = "-150",
-                    name = "amount",
-                    required = true)
-
-            @PathVariable("amount") double amount){
-        updateAccountService.updateBalanceByAccNum(accountNumber,amount);
-    }
+//    @PutMapping("/add-to-account/{accountNumber}/{amount}")
+//    @ApiOperation(value = "Updates the balance of the Account.", notes = "Updates the balance of the Account.")
+//    @ApiResponses(value ={
+//            @ApiResponse(code = 200, message = "Account balance updated", response = Response.class),
+//            @ApiResponse(code = 400, message = "Bad Request", response = Response.class),
+//            @ApiResponse(code = 404, message = "Not Found", response = Response.class),
+//            @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)
+//    })
+//    public void increaseBalanceByAccNum(
+//            @ApiParam(value = "The accountNumber that identifies the Account.",
+//                    example = "1",
+//                    name = "accountNumber",
+//                    required = true)
+//
+//            @PathVariable("accountNumber") Integer accountNumber,
+//
+//            @ApiParam(value = "The amount to increase balance by.",
+//            example = "150",
+//            name = "amount",
+//            required = true)
+//
+//        @PathVariable("amount") double amount){
+//            updateAccountService.updateBalanceByAccNum(accountNumber,amount);
+//    }
+//
+//    @PutMapping("/subtract-from-account/{accountNumber}/{amount}")
+//    @ApiOperation(value = "Updates the balance of the Account.", notes = "Updates the balance of the Account.")
+//    @ApiResponses(value ={
+//            @ApiResponse(code = 200, message = "Account balance updated", response = Response.class),
+//            @ApiResponse(code = 400, message = "Bad Request", response = Response.class),
+//            @ApiResponse(code = 404, message = "Not Found", response = Response.class),
+//            @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)
+//    })
+//    public void decreaseBalanceByAccNum(
+//            @ApiParam(value = "The accountNumber that identifies the Account.",
+//                    example = "1",
+//                    name = "accountNumber",
+//                    required = true)
+//
+//            @PathVariable("accountNumber") Integer accountNumber,
+//
+//            @ApiParam(value = "The amount to decrease balance by.",
+//                    example = "-150",
+//                    name = "amount",
+//                    required = true)
+//
+//            @PathVariable("amount") double amount){
+//        updateAccountService.updateBalanceByAccNum(accountNumber,amount);
+//    }
 
     @GetMapping("/all")
     @ApiOperation(value = "Gets all the Accounts.", notes = "Returns a list of accounts")

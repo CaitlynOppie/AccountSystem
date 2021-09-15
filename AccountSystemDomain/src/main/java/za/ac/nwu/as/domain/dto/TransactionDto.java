@@ -35,6 +35,15 @@ public class TransactionDto implements Serializable {
         this.transactionDate = transactionDate;
     }
 
+    public TransactionDto(TransactionDto transactionDto){
+        this.setTransactionID(transactionDto.getTransactionID());
+        this.setAmount(transactionDto.getAmount());
+        this.setTransactionDate(transactionDto.getTransactionDate());
+        if (null != transactionDto.getAccountNumber()){
+            this.accountNumber = transactionDto.getAccountNumber();
+        }
+    }
+
     public TransactionDto(Transaction transaction){
         this.setTransactionID(transaction.getTransactionID());
         this.setAmount(transaction.getAmount());
@@ -105,6 +114,12 @@ public class TransactionDto implements Serializable {
     public Transaction getTransaction(){
         return new Transaction(
                getTransactionID(), getAccountNumber(), getAmount(), getTransactionDate() );
+    }
+
+    @JsonIgnore
+    public TransactionDto getTransactionDto(){
+        return new TransactionDto(
+                getTransactionID(), getAccountNumber(), getAmount(), getTransactionDate() );
     }
 
     @Override
