@@ -29,7 +29,7 @@ public class MemberTranslatorImpl implements MemberTranslator {
                 memberDtos.add(new MemberDto(member));
             }
         }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
+            throw new RuntimeException("Unable to get members from database", e);
         }
         return memberDtos;
     }
@@ -40,7 +40,7 @@ public class MemberTranslatorImpl implements MemberTranslator {
             Member member = memberRepository.save(memberDto.getMember());
             return new MemberDto(member);
         }catch (Exception e){
-            throw new RuntimeException("Unable to save to the DB", e);
+            throw new RuntimeException("Unable to create new member", e);
         }
     }
 
@@ -50,7 +50,7 @@ public class MemberTranslatorImpl implements MemberTranslator {
             Member member = memberRepository.getMemberByID(memberID);
             return new MemberDto(member);
         }catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
+            throw new RuntimeException("Unable to get member details for member", e);
         }
     }
 

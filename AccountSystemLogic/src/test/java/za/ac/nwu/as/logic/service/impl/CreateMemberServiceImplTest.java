@@ -11,8 +11,11 @@ import org.mockito.Mockito;
 import org.mockito.Mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import za.ac.nwu.as.domain.dto.MemberDto;
+import za.ac.nwu.as.domain.persistence.Member;
 import za.ac.nwu.as.translator.flow.MemberTranslator;
 
+import static org.junit.Assert.*;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -35,8 +38,12 @@ public class CreateMemberServiceImplTest {
 
     @Test
     public void create() {
-        //testing that the create method is called exactly once when a new member is created.
-//        MemberDto test = memService.create(new MemberDto());
-//        verify(memTranslator, times(1)).create(any(MemberDto.class));
+            when(memTranslator.create(any(MemberDto.class))).then(returnsFirstArg());
+            MemberDto resultMem = memService.create(new MemberDto());
+            assertNotNull(resultMem); // test if member is created
+            assertNotNull(resultMem.getMemberID()); // test if member has an ID
+            assertEquals(10, resultMem.getMemPhone().length()); // test if phone number provided is 10 characters long
+            assertTrue(resultMem.getMemEmail().contains("@")); // test if valid email is provided
+            verify(memTranslator, atLeastOnce()).create(any(MemberDto.class));
     }
 }

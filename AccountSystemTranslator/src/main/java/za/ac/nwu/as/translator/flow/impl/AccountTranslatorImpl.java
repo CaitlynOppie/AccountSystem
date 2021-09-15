@@ -3,7 +3,6 @@ package za.ac.nwu.as.translator.flow.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.repo.persistence.AccountRepository;
-import za.ac.nwu.as.domain.dto.AccountDto;
 import za.ac.nwu.as.domain.persistence.Account;
 import za.ac.nwu.as.translator.flow.AccountTranslator;
 
@@ -22,12 +21,12 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public List<AccountDto> getAllAccounts(){
+    public List<za.ac.nwu.as.domain.dto.AccountDto> getAllAccounts(){
 
         try{
-            List<AccountDto> accountDtos = new ArrayList<>();
+            List<za.ac.nwu.as.domain.dto.AccountDto> accountDtos = new ArrayList<>();
             for(Account account : accountRepository.findAll()){
-                accountDtos.add(new AccountDto(account));
+                accountDtos.add(new za.ac.nwu.as.domain.dto.AccountDto(account));
             }
             return accountDtos;
 
@@ -37,10 +36,10 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public AccountDto create(AccountDto accountDto) {
+    public za.ac.nwu.as.domain.dto.AccountDto create(za.ac.nwu.as.domain.dto.AccountDto accountDto) {
         try{
             Account account = accountRepository.save(accountDto.getAccount());
-            return new AccountDto(account);
+            return new za.ac.nwu.as.domain.dto.AccountDto(account);
         }catch (Exception e){
             throw new RuntimeException("Unable to save to the DB", e);
             //rollback
@@ -48,20 +47,20 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public AccountDto getByAccountNumber(Integer accountNumber) {
+    public za.ac.nwu.as.domain.dto.AccountDto getByAccountNumber(Integer accountNumber) {
         try{
             Optional<Account> account = accountRepository.getByAccountNumber(accountNumber);
-            return new AccountDto(account);
+            return new za.ac.nwu.as.domain.dto.AccountDto(account);
         }catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);
         }
     }
 
     @Override
-    public AccountDto getBalanceByAccNum(Integer accountNumber) {
+    public za.ac.nwu.as.domain.dto.AccountDto getBalanceByAccNum(Integer accountNumber) {
         try{
             Account account = accountRepository.getBalanceByAccNum(accountNumber);
-            return new AccountDto(account);
+            return new za.ac.nwu.as.domain.dto.AccountDto(account);
         }catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);
         }

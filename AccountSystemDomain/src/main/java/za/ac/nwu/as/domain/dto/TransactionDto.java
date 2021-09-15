@@ -14,21 +14,22 @@ import java.util.Objects;
 public class TransactionDto implements Serializable {
 
     private Integer transactionID;
-    private AccountDto accountNumber;
+    private Integer accountNumber;
+    //private AccountDto accountNumber;
     private double amount;
     private LocalDate transactionDate;
 
     public TransactionDto() {
     }
 
-    public TransactionDto(Integer transactionID, AccountDto accountNumber, double amount, LocalDate transactionDate) {
+    public TransactionDto(Integer transactionID, Integer accountNumber, double amount, LocalDate transactionDate) {
         this.transactionID = transactionID;
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
-    public TransactionDto(AccountDto accountNumber, double amount, LocalDate transactionDate) {
+    public TransactionDto(Integer accountNumber, double amount, LocalDate transactionDate) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.transactionDate = transactionDate;
@@ -39,7 +40,7 @@ public class TransactionDto implements Serializable {
         this.setAmount(transaction.getAmount());
         this.setTransactionDate(transaction.getTransactionDate());
         if (null != transaction.getAccountNumber()){
-            this.accountNumber = new AccountDto(transaction.getAccountNumber());
+            this.accountNumber = transaction.getAccountNumber().getAccountNumber();
         }
     }
 
@@ -59,11 +60,11 @@ public class TransactionDto implements Serializable {
             example = "1",
             required = true)
 
-    public AccountDto getAccountNumber() {
+    public Integer getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(AccountDto accountNumber) {
+    public void setAccountNumber(Integer accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -103,7 +104,7 @@ public class TransactionDto implements Serializable {
     @JsonIgnore
     public Transaction getTransaction(){
         return new Transaction(
-               getTransactionID(), getAccountNumber().getAccountNr(), getAmount(), getTransactionDate() );
+               getTransactionID(), getAccountNumber(), getAmount(), getTransactionDate() );
     }
 
     @Override

@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.as.domain.persistence.Account;
-import za.ac.nwu.as.domain.persistence.Member;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -34,6 +32,7 @@ public class AccountDto implements Serializable {
         this.type = type;
         this.balance = balance;
     }
+
 
     public AccountDto(Account account)
     {

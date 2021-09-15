@@ -1,7 +1,6 @@
 package za.ac.nwu.as.domain.persistence;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import za.ac.nwu.as.domain.dto.AccountDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -44,6 +43,15 @@ public class Transaction implements Serializable {
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
+
+    public Transaction(Integer transactionID, Integer accountNumber, double amount, LocalDate transactionDate) {
+        this.transactionID = transactionID;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+
+        this.accountNumber = new Account(accountNumber);
+    }
+
 
     public Integer getTransactionID() {
         return transactionID;

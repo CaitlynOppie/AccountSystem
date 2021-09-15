@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import za.ac.nwu.as.domain.persistence.Account;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
