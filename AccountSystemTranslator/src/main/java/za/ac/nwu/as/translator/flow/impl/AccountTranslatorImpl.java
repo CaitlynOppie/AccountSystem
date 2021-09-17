@@ -58,7 +58,7 @@ public class AccountTranslatorImpl implements AccountTranslator {
     @Override
     public za.ac.nwu.as.domain.dto.AccountDto getByAccountNumber(Integer accountNumber) throws SQLException {
         try{
-            Optional<Account> account = accountRepository.getByAccountNumber(accountNumber);
+            Account account = accountRepository.getByAccountNumber(accountNumber);
             con.commit();
             return new za.ac.nwu.as.domain.dto.AccountDto(account);
         }catch (Exception e){

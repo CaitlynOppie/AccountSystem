@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     @Query("select a from Account a where a.accountNumber = ?1")
-    Optional<Account> getByAccountNumber(Integer accountNumber);
+    Account getByAccountNumber(Integer accountNumber);
 
     //view balance of account
     @Query(value = "SELECT a FROM Account a WHERE a.accountNumber = :accountNumber")
