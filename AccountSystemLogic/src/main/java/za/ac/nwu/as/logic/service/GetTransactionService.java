@@ -11,6 +11,4 @@ public interface GetTransactionService {
 
     TransactionDto getTransactionByAccountNumber(Integer accountNumber) throws SQLException;
 
-    TransactionDto getTransactionByDate(LocalDate transactionDate) throws SQLException;
-
 }

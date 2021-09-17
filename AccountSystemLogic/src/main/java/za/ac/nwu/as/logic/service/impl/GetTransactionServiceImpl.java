@@ -30,9 +30,4 @@ public class GetTransactionServiceImpl implements GetTransactionService {
         return transactionTranslator.getTransactionByAccountNumber(accountNumber);
     }
 
-    @Override
-    public TransactionDto getTransactionByDate(LocalDate transactionDate) throws SQLException {
-        return transactionTranslator.getTransactionByDate(transactionDate);
-    }
-
 }

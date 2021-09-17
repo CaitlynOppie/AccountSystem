@@ -64,16 +64,4 @@ public class TransactionTranslatorImpl implements TransactionTranslator {
             throw new RuntimeException("Unable to read from the DB", e);
         }
     }
-
-    @Override
-    public TransactionDto getTransactionByDate(LocalDate transactionDate) throws SQLException {
-        try{
-            Transaction transaction = transactionRepository.getTransactionByDate(transactionDate);
-            con.commit();
-            return new TransactionDto(transaction);
-        }catch (Exception e){
-            con.rollback();
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-    }
 }
