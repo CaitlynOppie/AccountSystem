@@ -6,6 +6,7 @@ import za.ac.nwu.as.domain.dto.TransactionDto;
 import za.ac.nwu.as.logic.service.GetTransactionService;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,17 +21,17 @@ public class GetTransactionServiceImpl implements GetTransactionService {
     }
 
     @Override
-    public List<TransactionDto> getAllTransactions() {
+    public List<TransactionDto> getAllTransactions() throws SQLException {
         return transactionTranslator.getAllTransactions();
     }
 
     @Override
-    public TransactionDto getTransactionByAccountNumber(Integer accountNumber) {
+    public TransactionDto getTransactionByAccountNumber(Integer accountNumber) throws SQLException {
         return transactionTranslator.getTransactionByAccountNumber(accountNumber);
     }
 
     @Override
-    public TransactionDto getTransactionByDate(LocalDate transactionDate) {
+    public TransactionDto getTransactionByDate(LocalDate transactionDate) throws SQLException {
         return transactionTranslator.getTransactionByDate(transactionDate);
     }
 

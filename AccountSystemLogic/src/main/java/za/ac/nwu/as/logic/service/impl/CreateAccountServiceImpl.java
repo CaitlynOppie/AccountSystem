@@ -7,6 +7,7 @@ import za.ac.nwu.as.logic.service.CreateAccountService;
 import za.ac.nwu.as.translator.flow.AccountTranslator;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 
 @Transactional
 @Component("createAccountFlowName")
@@ -20,7 +21,7 @@ public class CreateAccountServiceImpl implements CreateAccountService {
     }
 
     @Override
-    public AccountDto create(AccountDto accountDto) {
+    public AccountDto create(AccountDto accountDto) throws SQLException {
         if(null == accountDto.getType()){
             accountDto.setType("Miles");
         }

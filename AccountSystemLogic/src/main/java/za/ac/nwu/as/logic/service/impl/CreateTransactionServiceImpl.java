@@ -8,6 +8,7 @@ import za.ac.nwu.as.translator.flow.AccountTranslator;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 @Transactional
@@ -23,7 +24,7 @@ public class CreateTransactionServiceImpl implements CreateTransactionService {
     }
 
     @Override
-    public TransactionDto create(TransactionDto transactionDto) {
+    public TransactionDto create(TransactionDto transactionDto) throws SQLException {
         if(null == transactionDto.getTransactionDate()){
             transactionDto.setTransactionDate(LocalDate.now());
         }

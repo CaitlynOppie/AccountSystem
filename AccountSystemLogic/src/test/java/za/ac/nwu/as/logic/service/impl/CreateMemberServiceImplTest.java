@@ -14,6 +14,8 @@ import za.ac.nwu.as.domain.dto.MemberDto;
 import za.ac.nwu.as.domain.persistence.Member;
 import za.ac.nwu.as.translator.flow.MemberTranslator;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,7 +39,7 @@ public class CreateMemberServiceImplTest {
     }
 
     @Test
-    public void create() {
+    public void create() throws SQLException {
             when(memTranslator.create(any(MemberDto.class))).then(returnsFirstArg());
             MemberDto resultMem = memService.create(new MemberDto());
             assertNotNull(resultMem); // test if member is created

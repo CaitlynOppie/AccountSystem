@@ -13,6 +13,7 @@ import za.ac.nwu.as.domain.service.Response;
 import za.ac.nwu.as.logic.service.CreateMemberService;
 import za.ac.nwu.as.logic.service.GetMemberService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class MemberController {
     })
     public ResponseEntity<Response<MemberDto>> create(
             @ApiParam(value = "Request body to create a new Member.", required = true)
-            @RequestBody MemberDto member) {
+            @RequestBody MemberDto member) throws SQLException {
         MemberDto memberResponse = createMemberService.create(member);
         Response<MemberDto> response = new Response<>(true, memberResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -51,7 +52,7 @@ public class MemberController {
             @ApiResponse(code = 404, message = "Not Found", response = Response.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)})
 
-    public ResponseEntity<Response<List<MemberDto>>> getAll() {
+    public ResponseEntity<Response<List<MemberDto>>> getAll() throws SQLException {
         List<MemberDto> member = getMemberService.getAllMembers();
         Response<List<MemberDto>> response = new Response<>(true,member);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -70,7 +71,7 @@ public class MemberController {
                     example = "1",
                     name = "memberID",
                     required = true)
-            @PathVariable("memberID") Integer memberID){
+            @PathVariable("memberID") Integer memberID) throws SQLException {
         MemberDto member = getMemberService.getMemberByID(memberID);
         Response<MemberDto> response = new Response<>(true, member);
         return new ResponseEntity<>(response, HttpStatus.OK);

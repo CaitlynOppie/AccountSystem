@@ -16,6 +16,7 @@ import za.ac.nwu.as.logic.service.CreateTransactionService;
 import za.ac.nwu.as.logic.service.GetTransactionService;
 import za.ac.nwu.as.logic.service.UpdateAccountService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -42,7 +43,7 @@ public class TransactionController {
             @ApiResponse(code = 404, message = "Not Found", response = Response.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)})
 
-    public ResponseEntity<Response<List<TransactionDto>>> getAll() {
+    public ResponseEntity<Response<List<TransactionDto>>> getAll() throws SQLException {
         List<TransactionDto> transaction = getTransactionService.getAllTransactions();
         Response<List<TransactionDto>> response = new Response<>(true,transaction);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -57,7 +58,7 @@ public class TransactionController {
     })
     public ResponseEntity<Response<TransactionDto>> create(
             @ApiParam(value = "Request body to create a new Transaction.", required = true)
-            @RequestBody TransactionDto transaction) {
+            @RequestBody TransactionDto transaction) throws SQLException {
         TransactionDto transactionResponse = createTransactionService.create(transaction);
         Response<TransactionDto> response = new Response<>(true, transactionResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
