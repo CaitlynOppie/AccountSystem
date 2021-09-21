@@ -6,13 +6,14 @@ import org.springframework.stereotype.Repository;
 import za.ac.nwu.as.domain.persistence.Transaction;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     //Get transaction by account number
     @Query(value = "SELECT t FROM Transaction t WHERE t.accountNumber = :accountNumberD")
-    Transaction getTransactionByAccountNumber(Integer accountNumber);
+    List<Transaction> getTransactionByAccountNumber(Integer accountNumber);
 
 
 }

@@ -54,11 +54,14 @@ public class TransactionTranslatorImpl implements TransactionTranslator {
     }
 
     @Override
-    public TransactionDto getTransactionByAccountNumber(Integer accountNumber) throws SQLException {
+    public List<TransactionDto> getTransactionByAccountNumber(Integer accountNumber) throws SQLException {
         try{
-            Transaction transaction = transactionRepository.getTransactionByAccountNumber(accountNumber);
+            List<TransactionDto> transactionDtos = new ArrayList<>();
+            for(Transaction transaction : transactionRepository.findAll()){
+                transactionDtos.add(new TransactionDto(transaction));
+            }
             con.commit();
-            return new TransactionDto(transaction);
+            return transactionDtos;
         }catch (Exception e){
             con.rollback();
             throw new RuntimeException("Unable to read from the DB", e);

@@ -9,6 +9,6 @@ import java.util.List;
 public interface GetTransactionService {
     List<TransactionDto> getAllTransactions() throws SQLException;
 
-    TransactionDto getTransactionByAccountNumber(Integer accountNumber) throws SQLException;
+    List<TransactionDto> getTransactionByAccountNumber(Integer accountNumber) throws SQLException;
 
 }

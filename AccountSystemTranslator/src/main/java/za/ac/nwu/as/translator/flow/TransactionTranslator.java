@@ -16,5 +16,5 @@ public interface TransactionTranslator {
 
     TransactionDto create(TransactionDto transactionDto) throws SQLException;
 
-    TransactionDto getTransactionByAccountNumber(Integer accountNumber) throws SQLException;
+    List<TransactionDto> getTransactionByAccountNumber(Integer accountNumber) throws SQLException;
 }

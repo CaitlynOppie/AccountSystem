@@ -26,7 +26,7 @@ public class GetTransactionServiceImpl implements GetTransactionService {
     }
 
     @Override
-    public TransactionDto getTransactionByAccountNumber(Integer accountNumber) throws SQLException {
+    public List<TransactionDto> getTransactionByAccountNumber(Integer accountNumber) throws SQLException {
         return transactionTranslator.getTransactionByAccountNumber(accountNumber);
     }
 
