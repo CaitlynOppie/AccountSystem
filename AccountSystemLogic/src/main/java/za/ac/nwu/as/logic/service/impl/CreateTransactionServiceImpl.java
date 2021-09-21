@@ -26,12 +26,14 @@ public class CreateTransactionServiceImpl implements CreateTransactionService {
     @Override
     public TransactionDto create(TransactionDto transactionDto) throws SQLException {
         if(null == transactionDto.getTransactionDate()){
+            transactionDto.setTransactionID(1);
+            transactionDto.setAccountNumber(1);
+            transactionDto.setAmount(100);
             transactionDto.setTransactionDate(LocalDate.now());
         }
         TransactionDto transaction = transactionDto.getTransactionDto();
         TransactionDto newTransaction = transactionTranslator.create(transaction);
         accountTranslator.updateBalanceByAccNum(transaction.getAccountNumber(), transaction.getAmount());
-        //return transactionTranslator.create(transactionDto);
         return new TransactionDto(newTransaction);
     }
 }

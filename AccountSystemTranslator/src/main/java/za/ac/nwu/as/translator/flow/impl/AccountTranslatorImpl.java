@@ -27,12 +27,12 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public List<za.ac.nwu.as.domain.dto.AccountDto> getAllAccounts() throws SQLException {
+    public List<AccountDto> getAllAccounts() throws SQLException {
 
         try{
-            List<za.ac.nwu.as.domain.dto.AccountDto> accountDtos = new ArrayList<>();
+            List<AccountDto> accountDtos = new ArrayList<>();
             for(Account account : accountRepository.findAll()){
-                accountDtos.add(new za.ac.nwu.as.domain.dto.AccountDto(account));
+                accountDtos.add(new AccountDto(account));
             }
             con.commit();
             return accountDtos;
@@ -44,11 +44,11 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public za.ac.nwu.as.domain.dto.AccountDto create(AccountDto accountDto) throws SQLException {
+    public AccountDto create(AccountDto accountDto) throws SQLException {
         try{
             Account account = accountRepository.save(accountDto.getAccount());
             con.commit();
-            return new za.ac.nwu.as.domain.dto.AccountDto(account);
+            return new AccountDto(account);
         }catch (Exception e){
             con.rollback();
             throw new RuntimeException("Unable to save to the DB", e);
@@ -56,7 +56,7 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public za.ac.nwu.as.domain.dto.AccountDto getByAccountNumber(Integer accountNumber) throws SQLException {
+    public AccountDto getByAccountNumber(Integer accountNumber) throws SQLException {
         try{
             Account account = accountRepository.getByAccountNumber(accountNumber);
             con.commit();
@@ -68,7 +68,7 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public za.ac.nwu.as.domain.dto.AccountDto getBalanceByAccNum(Integer accountNumber) throws SQLException {
+    public AccountDto getBalanceByAccNum(Integer accountNumber) throws SQLException {
         try{
             Account account = accountRepository.getBalanceByAccNum(accountNumber);
             con.commit();
