@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import za.ac.nwu.as.domain.dto.AccountDto;
 import za.ac.nwu.as.domain.dto.TransactionDto;
+import za.ac.nwu.as.translator.flow.AccountTranslator;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
 import java.sql.SQLException;
@@ -19,6 +21,8 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateTransactionServiceImplTest {
+    @Mock
+    private AccountTranslator accountTranslator;
 
     @Mock
     private TransactionTranslator transTranslator;
@@ -28,6 +32,8 @@ public class CreateTransactionServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
+        lenient().when(transTranslator.create(any(TransactionDto.class))).then(returnsFirstArg());
+        lenient().when(accountTranslator.create(any(AccountDto.class))).then(returnsFirstArg());
     }
 
     @After
