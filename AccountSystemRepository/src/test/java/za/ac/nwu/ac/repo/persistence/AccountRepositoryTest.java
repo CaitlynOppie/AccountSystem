@@ -3,6 +3,7 @@ package za.ac.nwu.ac.repo.persistence;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -30,12 +31,14 @@ public class AccountRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-        memRepo.save(new Member(1,"Caitlyn","Opperman","ceopperman@gmail.com","0714587895"));
-        accRepo.save(new Account(1,1,"MILES",250));
+//        memRepo.save(new Member(1,"Caitlyn","Opperman","ceopperman@gmail.com","0714587895"));
+//        accRepo.save(new Account(1,1,"MILES",250));
     }
 
     @After
     public void tearDown() throws Exception {
+//        memRepo.deleteAll();
+//        accRepo.deleteAll();
     }
 
     @Test

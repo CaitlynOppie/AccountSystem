@@ -27,19 +27,16 @@ public class AccountServiceImplTest {
     private AccountServiceImpl accService;
 
     AccountDto resultAcc;
-    AccountDto newAcc;
 
     @Before
     public void setUp() throws Exception {
         when(accTranslator.create(any(AccountDto.class))).then(returnsFirstArg());
         resultAcc = accService.create(new AccountDto());
-        newAcc = accService.create(new AccountDto(1,1,"MILES",150));
     }
 
     @After
     public void tearDown() throws Exception {
         resultAcc = null;
-        newAcc = null;
     }
 
     @Test
@@ -67,10 +64,6 @@ public class AccountServiceImplTest {
         AccountDto acc = accService.getByAccountNumber(resultAcc.getAccountNumber());
         assertNotNull(acc);
         verify(accTranslator,atLeastOnce()).getByAccountNumber(resultAcc.getAccountNumber());
-    }
-
-    @Test
-    public void name() {
     }
 
     @Test

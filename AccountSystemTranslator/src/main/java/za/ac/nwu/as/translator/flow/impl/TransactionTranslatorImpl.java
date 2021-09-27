@@ -57,7 +57,7 @@ public class TransactionTranslatorImpl implements TransactionTranslator {
     public List<TransactionDto> getTransactionByAccountNumber(Integer accountNumber) throws SQLException {
         try{
             List<TransactionDto> transactionDtos = new ArrayList<>();
-            for(Transaction transaction : transactionRepository.findAll()){
+            for(Transaction transaction : transactionRepository.getTransactionByAccountNumber(accountNumber)){
                 transactionDtos.add(new TransactionDto(transaction));
             }
             con.commit();

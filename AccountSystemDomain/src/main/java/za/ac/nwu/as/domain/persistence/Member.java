@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "MEMBER")
+@Table(schema = "discovery",name = "member")
 public class Member implements Serializable {
 
     private static final long serialVersionUID = -5347390031256184618L;

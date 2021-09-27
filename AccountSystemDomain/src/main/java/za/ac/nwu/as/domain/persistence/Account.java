@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "ACCOUNT")
+@Table(schema = "discovery",name = "account")
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 7965908118439354885L;
