@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.as.domain.dto.AccountDto;
 import za.ac.nwu.as.domain.service.Response;
-import za.ac.nwu.as.logic.service.CreateAccountService;
-import za.ac.nwu.as.logic.service.GetAccountService;
-import za.ac.nwu.as.logic.service.UpdateAccountService;
+import za.ac.nwu.as.logic.service.AccountService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,15 +19,11 @@ import java.util.List;
 @RequestMapping("/account")
 public class AccountController {
 
-    private final GetAccountService getAccountService;
-    private final CreateAccountService createAccountService;
-    private final UpdateAccountService updateAccountService;
+    private final AccountService accountService;
 
     @Autowired
-    public AccountController(GetAccountService getAccountService, CreateAccountService createAccountService, UpdateAccountService updateAccountService) {
-        this.getAccountService = getAccountService;
-        this.createAccountService = createAccountService;
-        this.updateAccountService = updateAccountService;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @PostMapping("")
@@ -42,7 +36,7 @@ public class AccountController {
     public ResponseEntity<Response<AccountDto>> create(
             @ApiParam(value = "Request body to create a new Account.", required = true)
             @RequestBody AccountDto account) throws SQLException {
-        AccountDto accountResponse = createAccountService.create(account);
+        AccountDto accountResponse = accountService.create(account);
         Response<AccountDto> response = new Response<>(true, accountResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -56,7 +50,7 @@ public class AccountController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)})
 
     public ResponseEntity<Response<List<AccountDto>>> getAll() throws SQLException {
-    List<AccountDto> account = getAccountService.getAllAccounts();
+    List<AccountDto> account = accountService.getAllAccounts();
     Response<List<AccountDto>> response = new Response<>(true,account);
     return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -70,13 +64,33 @@ public class AccountController {
             @ApiResponse(code = 404, message = "Not Found", response = Response.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)
     })
-    public ResponseEntity<Response<AccountDto>> getBalanceByAccNum(
+    public ResponseEntity<Response<Double>> getBalanceByAccNum(
             @ApiParam(value = "The accountNumber that identifies the Account.",
                     example = "1",
                     name = "accountNumber",
                     required = true)
             @PathVariable("accountNumber") Integer accountNumber) throws SQLException {
-        AccountDto account = getAccountService.getBalanceByAccNum(accountNumber);
+        double balance = accountService.getBalanceByAccNum(accountNumber);
+        Response<Double> response = new Response<>(true, balance);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/getByAccNum/{accountNumber}")
+    @ApiOperation(value = "Fetches the balance of the account using the Account Number.",
+            notes = "Fetches the balance of the account corresponding to the given account number")
+    @ApiResponses(value ={
+            @ApiResponse(code = 200, message = "Account Type returned", response = Response.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = Response.class),
+            @ApiResponse(code = 404, message = "Not Found", response = Response.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)
+    })
+    public ResponseEntity<Response<AccountDto>> getByAccNum(
+            @ApiParam(value = "The accountNumber that identifies the Account.",
+                    example = "1",
+                    name = "accountNumber",
+                    required = true)
+            @PathVariable("accountNumber") Integer accountNumber) throws SQLException {
+        AccountDto account = accountService.getByAccountNumber(accountNumber);
         Response<AccountDto> response = new Response<>(true, account);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -61,6 +61,13 @@ public class Account implements Serializable {
         this.transactions = transactions;
     }
 
+    public Account(Integer accountNumber, Integer memberID, String type, double balance) {
+        this.accountNumber = accountNumber;
+        this.memberID = new Member(memberID);
+        this.type = type;
+        this.balance = balance;
+    }
+
     public Integer getAccountNumber() {
         return accountNumber;
     }

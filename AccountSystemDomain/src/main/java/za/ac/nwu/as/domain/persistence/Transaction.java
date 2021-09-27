@@ -47,10 +47,16 @@ public class Transaction implements Serializable {
 
     public Transaction(Integer transactionID, Integer accountNumber, double amount, LocalDate transactionDate) {
         this.transactionID = transactionID;
+        this.accountNumber = new Account(accountNumber);
         this.amount = amount;
         this.transactionDate = transactionDate;
+    }
 
+    public Transaction(Integer transactionID, Integer accountNumber, double amount) {
+        this.transactionID = transactionID;
         this.accountNumber = new Account(accountNumber);
+        this.amount = amount;
+        this.transactionDate = LocalDate.now();
     }
 
 

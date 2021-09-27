@@ -5,11 +5,14 @@ import za.ac.nwu.as.domain.dto.AccountDto;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface GetAccountService {
+public interface AccountService {
+    AccountDto create(AccountDto accountDto) throws SQLException;
+
     List<AccountDto> getAllAccounts() throws SQLException;
 
-    AccountDto getBalanceByAccNum(Integer accountNumber) throws SQLException;
+    double getBalanceByAccNum(Integer accountNumber) throws SQLException;
 
     AccountDto getByAccountNumber(Integer accountNumber) throws SQLException;
 
+    void updateBalanceByAccNum(Integer accountNumber, double amount) throws SQLException;
 }

@@ -10,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.as.domain.dto.MemberDto;
 import za.ac.nwu.as.domain.service.Response;
-import za.ac.nwu.as.logic.service.CreateMemberService;
-import za.ac.nwu.as.logic.service.GetMemberService;
+import za.ac.nwu.as.logic.service.MemberService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,13 +19,11 @@ import java.util.List;
 @RequestMapping("/member")
 public class MemberController {
 
-    private final GetMemberService getMemberService;
-    private final CreateMemberService createMemberService;
+    private final MemberService memberService;
 
     @Autowired
-    public MemberController(GetMemberService getMemberService, CreateMemberService createMemberService) {
-        this.getMemberService = getMemberService;
-        this.createMemberService = createMemberService;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     @PostMapping("")
@@ -39,7 +36,7 @@ public class MemberController {
     public ResponseEntity<Response<MemberDto>> create(
             @ApiParam(value = "Request body to create a new Member.", required = true)
             @RequestBody MemberDto member) throws SQLException {
-        MemberDto memberResponse = createMemberService.create(member);
+        MemberDto memberResponse = memberService.create(member);
         Response<MemberDto> response = new Response<>(true, memberResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -53,7 +50,7 @@ public class MemberController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = Response.class)})
 
     public ResponseEntity<Response<List<MemberDto>>> getAll() throws SQLException {
-        List<MemberDto> member = getMemberService.getAllMembers();
+        List<MemberDto> member = memberService.getAllMembers();
         Response<List<MemberDto>> response = new Response<>(true,member);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -72,7 +69,7 @@ public class MemberController {
                     name = "memberID",
                     required = true)
             @PathVariable("memberID") Integer memberID) throws SQLException {
-        MemberDto member = getMemberService.getMemberByID(memberID);
+        MemberDto member = memberService.getMemberByID(memberID);
         Response<MemberDto> response = new Response<>(true, member);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

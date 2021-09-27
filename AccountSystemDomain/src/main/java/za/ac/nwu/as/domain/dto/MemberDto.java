@@ -121,8 +121,9 @@ public class MemberDto {
     }
 
     @JsonIgnore
-    public Member getMemID(){
-        return new Member(getMemberID());
+    public MemberDto getMemberDto(){
+        return new MemberDto(
+                getMemberID(), getMemFirstName(), getMemLastName(), getMemEmail(), getMemPhone());
     }
 
     @Override

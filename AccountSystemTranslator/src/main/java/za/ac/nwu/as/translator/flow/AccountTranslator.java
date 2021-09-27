@@ -15,7 +15,7 @@ public interface AccountTranslator {
 
     AccountDto create(AccountDto accountDto) throws SQLException;
 
-    AccountDto getBalanceByAccNum(Integer accountNumber) throws SQLException;
+    double getBalanceByAccNum(Integer accountNumber) throws SQLException;
 
     void updateBalanceByAccNum(Integer accountNumber, double amount) throws SQLException;
 }

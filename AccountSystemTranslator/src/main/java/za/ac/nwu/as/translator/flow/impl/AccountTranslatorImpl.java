@@ -68,11 +68,11 @@ public class AccountTranslatorImpl implements AccountTranslator {
     }
 
     @Override
-    public AccountDto getBalanceByAccNum(Integer accountNumber) throws SQLException {
+    public double getBalanceByAccNum(Integer accountNumber) throws SQLException {
         try{
-            Account account = accountRepository.getBalanceByAccNum(accountNumber);
+            double accountBalance = accountRepository.getBalanceByAccNum(accountNumber);
             con.commit();
-            return new AccountDto(account);
+            return accountBalance;
         }catch (Exception e){
             con.rollback();
             throw new RuntimeException("Unable to read from the DB", e);
@@ -82,8 +82,7 @@ public class AccountTranslatorImpl implements AccountTranslator {
     @Override
     public void updateBalanceByAccNum(Integer accountNumber, double amount) throws SQLException {
         try{
-            Account account = accountRepository.getBalanceByAccNum(accountNumber);
-            double balance = account.getBalance();
+            double balance = accountRepository.getBalanceByAccNum(accountNumber);
             if((amount < 0) && (Math.abs(amount) < balance)) {
                 accountRepository.updateBalanceByAccNum(accountNumber, amount);
                 con.commit();

@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CreateTransactionServiceImplTest {
+public class TransactionServiceImplTest {
     @Mock
     private AccountTranslator accountTranslator;
 
@@ -28,7 +28,7 @@ public class CreateTransactionServiceImplTest {
     private TransactionTranslator transTranslator;
 
     @InjectMocks
-    private CreateTransactionServiceImpl transService;
+    private TransactionServiceImpl transService;
 
     @Before
     public void setUp() throws Exception {

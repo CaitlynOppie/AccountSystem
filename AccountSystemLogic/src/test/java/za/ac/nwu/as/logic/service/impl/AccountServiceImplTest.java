@@ -18,21 +18,28 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CreateAccountServiceImplTest {
+public class AccountServiceImplTest {
 
     @Mock
     private AccountTranslator accTranslator;
 
     @InjectMocks
-    private CreateAccountServiceImpl accService;
+    private AccountServiceImpl accService;
+
+    AccountDto resultAcc;
+    AccountDto newAcc;
 
     @Before
     public void setUp() throws Exception {
-
+        when(accTranslator.create(any(AccountDto.class))).then(returnsFirstArg());
+        resultAcc = accService.create(new AccountDto());
+        newAcc = accService.create(new AccountDto(1,1,"MILES",150));
     }
 
     @After
     public void tearDown() throws Exception {
+        resultAcc = null;
+        newAcc = null;
     }
 
     @Test
@@ -44,5 +51,32 @@ public class CreateAccountServiceImplTest {
         assertTrue(resultAcc.getType().equalsIgnoreCase("MILES") || resultAcc.getType().equalsIgnoreCase("PLAYS") || resultAcc.getType().equalsIgnoreCase("RANDS"));
         // test if account type is valid
         verify(accTranslator, atLeastOnce()).create(any(AccountDto.class));
+    }
+
+    @Test
+    public void getBalanceByAccNum() throws SQLException {
+        assertNotNull(resultAcc);
+        double balance = accService.getBalanceByAccNum(resultAcc.getAccountNumber());
+        assertNotNull(balance);
+    }
+
+    @Test
+    public void getByAccountNumber() throws SQLException {
+        assertNotNull(resultAcc);
+        when(accTranslator.getByAccountNumber(resultAcc.getAccountNumber())).thenReturn(resultAcc);
+        AccountDto acc = accService.getByAccountNumber(resultAcc.getAccountNumber());
+        assertNotNull(acc);
+        verify(accTranslator,atLeastOnce()).getByAccountNumber(resultAcc.getAccountNumber());
+    }
+
+    @Test
+    public void name() {
+    }
+
+    @Test
+    public void updateBalanceByAccNum() throws SQLException {
+        assertNotNull(resultAcc);
+        accService.updateBalanceByAccNum(resultAcc.getAccountNumber(),150);
+        verify(accTranslator, atLeastOnce()).updateBalanceByAccNum(resultAcc.getAccountNumber(),150);
     }
 }

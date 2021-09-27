@@ -13,26 +13,37 @@ import java.util.Optional;
 public class AccountDto implements Serializable {
 
     private Integer accountNumber;
-    private MemberDto memberID;
+    private Integer memberID;
+//    private MemberDto memberID;
     private String type;
     private double balance;
 
     public AccountDto() {
     }
 
-    public AccountDto(Integer accountNumber, MemberDto memberID, String type, double balance) {
+    public AccountDto(Integer accountNumber, Integer memberID, String type, double balance) {
         this.accountNumber = accountNumber;
         this.memberID = memberID;
         this.type = type;
         this.balance = balance;
     }
 
-    public AccountDto(MemberDto memberID, String type, double balance) {
+    public AccountDto(Integer memberID, String type, double balance) {
         this.memberID = memberID;
         this.type = type;
         this.balance = balance;
     }
 
+
+    public AccountDto(AccountDto accountDto)
+    {
+        this.setAccountNumber(accountDto.getAccountNumber());
+        this.setType(accountDto.getType());
+        this.setBalance(accountDto.getBalance());
+        if (null != accountDto.getMemberID()){
+            this.memberID = accountDto.getMemberID();
+        }
+    }
 
     public AccountDto(Account account)
     {
@@ -40,11 +51,8 @@ public class AccountDto implements Serializable {
         this.setType(account.getType());
         this.setBalance(account.getBalance());
         if (null != account.getMemberID()){
-            this.memberID = new MemberDto(account.getMemberID());
+            this.memberID = account.getMemberID().getMemberID();
         }
-    }
-
-    public AccountDto(Optional<Account> account) {
     }
 
     public Integer getAccountNumber(){
@@ -63,11 +71,11 @@ public class AccountDto implements Serializable {
             example = "1",
             required = true)
 
-    public MemberDto getMemberID() {
+    public Integer getMemberID() {
         return memberID;
     }
 
-    public void setMemberID(MemberDto memberID) {
+    public void setMemberID(Integer memberID) {
         this.memberID = memberID;
     }
 
@@ -118,7 +126,7 @@ public class AccountDto implements Serializable {
 
     @JsonIgnore
     public Account getAccount(){
-        return new Account(getAccountNumber(), getMemberID().getMemID(), getType(), getBalance());
+        return new Account(getAccountNumber(), getMemberID(), getType(), getBalance());
     }
 
     @JsonIgnore
