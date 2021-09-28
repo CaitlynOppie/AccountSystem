@@ -122,7 +122,6 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.3</version>
                     <configuration>
-<!--                        TODO: Use: "mvn clean install -DhaltOnFailure=false" to continue builds locally that fail test coverage-->
                         <haltOnFailure>${haltOnFailure}</haltOnFailure>
                         <rules>
                             <rule>
@@ -138,7 +137,6 @@
                                     <exclude>za.ac.nwu.as.logic.service.impl.TransactionServiceImpl.getAllTransactions</exclude>
                                     <exclude>za.ac.nwu.as.logic.service.impl.TransactionServiceImpl.getTransactionByAccount</exclude>
                                     <exclude>za.ac.nwu.ac.repo.persistence.TransactionRepository</exclude>
-<!--                                    <exclude>za.ac.nwu.ac.repo.*</exclude>-->
                                 </excludes>
                                 <limits>
                                     <limit>
