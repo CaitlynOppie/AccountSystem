@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
-@Component("createMemberFlowName")
+@Component("memberServiceFlow")
 public class MemberServiceImpl implements MemberService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MemberServiceImpl.class);

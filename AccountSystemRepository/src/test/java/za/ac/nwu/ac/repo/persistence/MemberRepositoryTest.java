@@ -25,12 +25,12 @@ public class MemberRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-        memRepo.save(new Member(1,"Caitlyn","Opperman","ceopperman@gmail.com","0714587895"));
+//        memRepo.save(new Member(1,"Caitlyn","Opperman","ceopperman@gmail.com","0714587895"));
     }
 
     @After
     public void tearDown() throws Exception {
-        memRepo.deleteAll();
+//        memRepo.deleteAll();
     }
 
     @Test

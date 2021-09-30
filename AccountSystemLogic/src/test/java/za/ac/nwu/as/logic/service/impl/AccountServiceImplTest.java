@@ -44,9 +44,6 @@ public class AccountServiceImplTest {
         when(accTranslator.create(any(AccountDto.class))).then(returnsFirstArg());
         AccountDto resultAcc = accService.create(new AccountDto());
         assertNotNull(resultAcc); // test if account is created
-        assertNotNull(resultAcc.getAccountNumber()); // test if account has a number to uniquely identify it
-        assertTrue(resultAcc.getType().equalsIgnoreCase("MILES") || resultAcc.getType().equalsIgnoreCase("PLAYS") || resultAcc.getType().equalsIgnoreCase("RANDS"));
-        // test if account type is valid
         verify(accTranslator, atLeastOnce()).create(any(AccountDto.class));
     }
 

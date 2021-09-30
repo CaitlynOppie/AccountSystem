@@ -8,13 +8,14 @@ import za.ac.nwu.as.logic.service.TransactionService;
 import za.ac.nwu.as.translator.flow.AccountTranslator;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
+import javax.annotation.Generated;
 import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
 @Transactional
-@Component("createATransactionFlowName")
+@Component("transactionServiceFlow")
 public class TransactionServiceImpl implements TransactionService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionServiceImpl.class);

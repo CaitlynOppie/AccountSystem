@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
-@Component("createAccountFlowName")
+@Component("accountServiceFlow")
 public class AccountServiceImpl implements AccountService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
@@ -28,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto create(AccountDto accountDto) throws SQLException {
         LOGGER.info("The input object for this create method is {}", accountDto);
-        if(null == accountDto){
+        if(null == accountDto.getType()){
             accountDto.setAccountNumber(1);
             accountDto.setType("Miles");
             accountDto.setBalance(250);

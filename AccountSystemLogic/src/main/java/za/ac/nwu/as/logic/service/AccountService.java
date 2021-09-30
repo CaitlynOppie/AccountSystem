@@ -1,10 +1,12 @@
 package za.ac.nwu.as.logic.service;
 
+import org.springframework.stereotype.Service;
 import za.ac.nwu.as.domain.dto.AccountDto;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public interface AccountService {
     AccountDto create(AccountDto accountDto) throws SQLException;
 

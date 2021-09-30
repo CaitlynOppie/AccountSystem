@@ -13,6 +13,7 @@ import za.ac.nwu.as.translator.flow.AccountTranslator;
 import za.ac.nwu.as.translator.flow.TransactionTranslator;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -48,5 +49,17 @@ public class TransactionServiceImplTest {
         assertNotNull(resultTrans.getTransactionID()); // test if transaction has an ID to uniquely identify it
         assertNotEquals(0,resultTrans.getAmount()); // tests if provided amount is valid (either positive or negative)
         verify(transTranslator, atLeastOnce()).create(any(TransactionDto.class));
+    }
+
+    @Test
+    public void getAllTransactions() throws SQLException{
+        List<TransactionDto> allTransactions = transService.getAllTransactions();
+        verify(transTranslator, atLeastOnce()).getAllTransactions();
+    }
+
+    @Test
+    public void getTransactionByAccountNumber() throws SQLException{
+        List<TransactionDto> allTransactions = transService.getTransactionByAccountNumber(1);
+        verify(transTranslator, atLeastOnce()).getTransactionByAccountNumber(1);
     }
 }
