@@ -12,7 +12,7 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     //Get transaction by account number
-    @Query(value = "SELECT t FROM Transaction t WHERE t.accountNumber = :accountNumberD")
+    @Query(value = "SELECT t FROM Transaction t WHERE t.accountNumber.accountNumber = :accountNumber")
     List<Transaction> getTransactionByAccountNumber(Integer accountNumber);
 
 

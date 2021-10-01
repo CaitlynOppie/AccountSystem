@@ -130,7 +130,6 @@
                                     <exclude>za.ac.nwu.as.domain.*</exclude>
                                     <exclude>za.ac.nwu.as.logic.config.LogicConfig</exclude>
                                     <exclude>za.ac.nwu.ac.repo.config.RepositoryConfig</exclude>
-                                    <exclude>za.ac.nwu.ac.repo.persistence.TransactionRepository</exclude>
                                     <exclude>za.ac.nwu.as.translator.*</exclude>
                                     <exclude>za.ac.nwu.as.web.sb.config.SwaggerConfiguration</exclude>
                                     <exclude>za.ac.nwu.as.web.sb.config.WebConfig</exclude>
